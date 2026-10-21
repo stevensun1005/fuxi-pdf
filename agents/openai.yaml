@@ -1,6 +1,6 @@
 interface:
   display_name: "复习pdf"
   short_description: "理工科逐页中文精讲，配代码框与表格；考场册先中文理解再英文作答，附来源核验"
-  default_prompt: "使用 $fuxi-pdf 按需求准备复习 PDF 或 cheatsheet：逐页精讲用中文，配代码框、表格和提示框；考场册先中文解释再给英文短答，并核验来源覆盖和排版。"
+  default_prompt: "使用 $fuxi-pdf 按需求准备复习 PDF 或 cheatsheet：两册都配代码框、表格和提示框；逐页精讲用中文，考场册用标准纸张、先中文解释再给英文短答，并核验来源覆盖和排版。"
 policy:
   allow_implicit_invocation: true

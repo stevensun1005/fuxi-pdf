@@ -21,6 +21,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 Third-party template notices are retained in licenses/ and references/sources.md.
-The real-lecture demo excerpt, demo-content.json, derived example PDFs and their
+The full-lecture public adaptation, demo-content.json, exam-content.json, example PDFs and their
 PNG previews are licensed separately under CC BY-NC-SA 4.0; see
 licenses/MIT-OCW-demo-LICENSE.md. The MIT grant above does not replace that license.

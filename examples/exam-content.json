@@ -1,0 +1,396 @@
+[
+  {
+    "id": "C01",
+    "title": "故障模型与三步容错",
+    "source_pages": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "index_terms": [
+      "containment",
+      "fail-fast",
+      "fail-stop",
+      "fault model",
+      "masking"
+    ],
+    "walkthrough": [
+      [
+        "中文理解：先定义保证的范围",
+        "容错不等于组件永不损坏，而是某些组件故障时，系统在指定故障模型内仍满足目标。先列出软件、硬件、操作和环境故障；再检测、限制影响并选择处理方式。蓝屏截图只能证明某种异常被报告，不能独自证明根因或恢复成功。"
+      ],
+      [
+        "机制：检测、限制与处理不能混为一谈",
+        "Detect 是发现异常；contain 是限制影响范围；handle 才是决定报告、停止、恢复或掩盖。自编例：校验失败后停止返回不可信数据，与读取健康副本继续服务，都可能是合适策略，取决于应用语义。"
+      ],
+      [
+        "易错点：重启与独立性",
+        "重启可能消除暂态状态，却不保证修复持久缺陷。相同程序和输入可能让多个副本一起失败；不能因为机器数量不同就假设它们独立。故障列表需要随着测试和实际事件迭代。"
+      ]
+    ],
+    "english": "Fault tolerance means maintaining the required system behavior under a stated fault model. A design should identify possible faults, detect and contain their effects, and choose an appropriate response. Reporting or stopping may be safer than returning incorrect results. A crash screen is evidence of an observed failure, not proof of its root cause or successful recovery.",
+    "questions": [
+      [
+        "Q1. What are the three steps in designing fault-tolerant systems?",
+        "Identify possible faults; detect and contain their effects; then handle them. State the assumed faults and the behavior that must still be preserved."
+      ],
+      [
+        "Q2. Why is detecting an error not enough?",
+        "Detection only establishes that an abnormal condition was observed. The system must still limit its effects and choose a response that preserves the required semantics."
+      ]
+    ],
+    "takeaway": "记住：先写故障模型，再解释检测、隔离和处理各自负责什么。",
+    "walkthrough_insertions": [
+      {
+        "after": 1,
+        "type": "code",
+        "text": "# 自编伪代码\nidentify fault model\nif abnormal state detected:\n    contain effects\n    report / stop / recover / mask"
+      },
+      {
+        "after": 2,
+        "type": "table",
+        "headers": [
+          "处理策略",
+          "本讲语境中的含义"
+        ],
+        "rows": [
+          [
+            "fail-fast",
+            "尽早检测并向上层报告"
+          ],
+          [
+            "fail-stop",
+            "检测后停止，不继续传播影响"
+          ],
+          [
+            "masking",
+            "利用冗余等手段维持对外行为"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "C02",
+    "title": "可用性：MTTF、MTTR 与单位一致性",
+    "source_pages": [
+      7
+    ],
+    "index_terms": [
+      "availability",
+      "mean time to failure (MTTF)",
+      "mean time to repair (MTTR)"
+    ],
+    "walkthrough": [
+      [
+        "中文理解：正常时间占总时间的比例",
+        "依据官方配套提纲，在反复正常运行与修复的简化模型下，A = MTTF/(MTTF+MTTR)。这里 MTTF 是平均正常运行到失效的时间，MTTR 是平均修复/恢复时间；两个时间必须先换成同一单位。"
+      ],
+      [
+        "官方例子的复算",
+        "正常时间取 30 天，恢复取 10 分钟：30×24×60=43,200 分钟，因此 A=43,200/43,210≈0.99976857，即约 99.9769%。故障占比为 10/43,210，而不是 10/43,200。"
+      ],
+      [
+        "易错点：可用不等于永不故障",
+        "增大 MTTF 或减小 MTTR 都能改善此比值。长期可用性并不是“从不失败”的概率，也不保证数据持久性。应用不同或统计口径不同，需要重新确认模型，而不能直接套公式。"
+      ]
+    ],
+    "english": "In the lecture's alternating uptime-and-repair model, availability is MTTF divided by MTTF plus MTTR. Convert both times to the same unit before calculating the ratio. Availability can improve either by increasing average uptime or by reducing recovery time. This long-run uptime fraction is not a guarantee of uninterrupted operation or data durability.",
+    "questions": [
+      [
+        "Q1. Compute availability for 30 days of uptime and 10 minutes of recovery.",
+        "Thirty days is 43,200 minutes, so availability is 43,200/(43,200+10), approximately 0.99976857 or 99.9769%. Both quantities must use the same unit."
+      ],
+      [
+        "Q2. Why can faster recovery improve availability without preventing failures?",
+        "Recovery time contributes to the denominator but not the uptime numerator. Reducing MTTR reduces the fraction of time spent unavailable even if the average time to failure is unchanged."
+      ]
+    ],
+    "takeaway": "记住：分母包含正常时间与恢复时间；提高可用性不只有“减少故障”这一条路。",
+    "walkthrough_insertions": [
+      {
+        "after": 1,
+        "type": "code",
+        "text": "# 依据官方提纲的例子；时间单位为 minutes\nMTTF = 30 * 24 * 60 = 43200\nMTTR = 10\nA = 43200 / 43210 = 0.99976857\nunavailable_fraction = 10 / 43210"
+      },
+      {
+        "after": 2,
+        "type": "table",
+        "headers": [
+          "指标",
+          "单位 / 判断"
+        ],
+        "rows": [
+          [
+            "MTTF、MTTR",
+            "时间；计算前统一单位"
+          ],
+          [
+            "availability",
+            "无量纲比例，或百分数"
+          ],
+          [
+            "durability",
+            "数据持久性，不能由上述比值直接保证"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "C03",
+    "title": "磁盘失效、MTBF 与统计口径",
+    "source_pages": [
+      8,
+      9,
+      10
+    ],
+    "index_terms": [
+      "bathtub curve",
+      "disk failure",
+      "mean time between failures (MTBF)"
+    ],
+    "walkthrough": [
+      [
+        "中文理解：更换硬件不等于找回数据",
+        "磁盘的特殊之处在于它保存持久状态。换一块空白盘可以恢复硬件能力，却不能自动恢复唯一的数据副本。随后 RAID 的简化模型是假设整盘不可读，而存活盘正确可用。"
+      ],
+      [
+        "统计例：大数字不代表单体寿命",
+        "原第 9 页的厂商指标 700,000 小时约等于 80 年，但这不是每块盘都能使用 80 年。官方提纲假设 1,000 块盘各观察 3,000 小时、共 4 次故障，则得到 750,000 盘小时/次；它不是对该厂商真实测试过程的断言。"
+      ],
+      [
+        "易错点：不能省略年龄与环境",
+        "风险可能随年龄变化，不能仅凭平均值断言无记忆或恒定失效率。MTBF 指标、单体寿命与保修期不是一回事；统计样本和实际部署环境也可能不同。公开材料第 9 页以文字替代了不在 OCW 开放许可内的厂商图片。"
+      ]
+    ],
+    "english": "An aggregate MTBF figure is not a guaranteed lifetime for an individual disk. It may be estimated from total device-hours divided by observed failures, and its interpretation depends on the sample and observation conditions. Failure risk can vary with device age, so a large average alone does not establish a constant hazard rate. Replacing failed hardware also does not restore data unless recovery information already exists.",
+    "questions": [
+      [
+        "Q1. Why does a 700,000-hour MTBF not promise an 80-year disk lifetime?",
+        "It is an aggregate statistical measure, not a lifetime guarantee for each device. The result depends on the sample, test conditions and failure model, and individual disks may fail much earlier."
+      ],
+      [
+        "Q2. What does an age-dependent failure risk change?",
+        "It means the probability of failure over a future interval may depend on the disk's age. A single average does not justify assuming a memoryless process or a constant hazard rate."
+      ]
+    ],
+    "takeaway": "记住：看指标时同时问“观察了谁、观察多久、故障怎样计数、模型是否适用”。",
+    "walkthrough_insertions": [
+      {
+        "after": 1,
+        "type": "code",
+        "text": "# 官方提纲的假设例，不是厂商实测记录\nobserved_device_hours = 1000 * 3000 = 3000000\nfailures = 4\naggregate_estimate = 3000000 / 4 = 750000 hours\n700000 / (24 * 365) = 79.91 years"
+      }
+    ]
+  },
+  {
+    "id": "C04",
+    "title": "RAID 1：用镜像保留第二份数据",
+    "source_pages": [
+      11
+    ],
+    "index_terms": [
+      "mirroring",
+      "RAID 1"
+    ],
+    "walkthrough": [
+      [
+        "中文理解：副本为什么有用",
+        "RAID 1 把同一逻辑块保存到两个物理位置。单盘故障时，存活副本仍能提供原来的内容；随后可用它重建替换盘。这个结论依赖副本已正确同步，以及存活盘能够读出。"
+      ],
+      [
+        "容量与手算例",
+        "沿用课件记号：N 是原始数据所需的等容量盘数，C 是每盘容量。RAID 1 用 2N 块盘提供约 N×C 可用容量。自编例：N=2、C=4 TB，需要 4 块物理盘，可用容量约 8 TB，忽略格式等开销。"
+      ],
+      [
+        "易错点与边界",
+        "能恢复任意单盘失效，不代表能恢复任意两盘失效。两盘若属于同一个镜像对，就可能丢数据。镜像也不是备份：误删除、错误写入或共同故障仍需要其他保护。"
+      ]
+    ],
+    "english": "RAID 1 stores a mirrored copy of each logical block. If one disk fails, a surviving synchronized mirror can supply the data and rebuild a replacement. With N disks' worth of data, two-way mirroring requires 2N equal-capacity physical disks, so usable capacity is about half of raw capacity. Mirroring protects against disk failure; it does not replace an independent backup.",
+    "questions": [
+      [
+        "Q1. Why can RAID 1 survive a single-disk failure?",
+        "Each logical block has a copy on another disk. Assuming the mirror was synchronized and remains readable, the system can use that copy after one disk fails."
+      ],
+      [
+        "Q2. What is the main capacity tradeoff, and is mirroring a backup?",
+        "Two-way mirroring uses about twice the physical capacity needed for one copy. It is not a substitute for backup, because accidental deletion or corrupted writes may affect both copies."
+      ]
+    ],
+    "takeaway": "记住：镜像保存完整副本；容错的代价是约一半的原始容量用于冗余。",
+    "walkthrough_insertions": [
+      {
+        "after": 1,
+        "type": "code",
+        "text": "# 自编例：每盘 C = 4 TB，N = 2\nphysical_disks = 2 * N = 4\nraw_capacity = 4 * 4 TB = 16 TB\nusable_capacity = N * C = 8 TB"
+      }
+    ]
+  },
+  {
+    "id": "C05",
+    "title": "RAID 4：用 XOR 校验代替完整复制",
+    "source_pages": [
+      12
+    ],
+    "index_terms": [
+      "parity",
+      "RAID 4",
+      "striping",
+      "XOR"
+    ],
+    "walkthrough": [
+      [
+        "中文理解：按条带计算校验",
+        "同一条带中，P = D1 XOR D2 XOR ... XOR DN。这里 XOR 是按位异或，不是普通加法。某个数据块丢失时，用 P 与其余块异或，就能消去已知贡献；若校验盘坏了，也能从数据重算 P。"
+      ],
+      [
+        "恢复例与适用条件",
+        "自编例：A=10、B=11、P=01，丢失 B 后以 A XOR P 恢复为 11。假设其余块正确且可读、故障位置已知、校验与数据一致。N 块数据盘只需额外一块校验盘；每条带一个关系一般不足以解两个未知块。"
+      ],
+      [
+        "容量、性能与易错点",
+        "N+1 块等容量物理盘提供约 N 块盘的可用空间。条带化可让数据访问并行；但所有正常数据写入都涉及专用校验盘更新，因此并行写受它限制。校验不是额外保存一份完整文件，也不保证任何读写都更快。"
+      ]
+    ],
+    "english": "RAID 4 stripes data across N disks and stores one XOR parity block per stripe on a dedicated parity disk. A single missing block can be reconstructed from parity and the surviving blocks, assuming they are correct and consistent. It requires N+1 equal-capacity disks for N disks' worth of data. Striping can improve parallel access, but parity updates concentrate write traffic on one disk.",
+    "questions": [
+      [
+        "Q1. How does XOR parity recover a missing data block?",
+        "XOR the parity block with every surviving data block in that stripe. Equal contributions cancel, leaving the missing block. This assumes one missing block and correct, consistent surviving information."
+      ],
+      [
+        "Q2. Why can the dedicated parity disk become a bottleneck?",
+        "Writes to different data disks still require updates to the same parity disk. That shared update path limits concurrent write throughput even when the data disks could work in parallel."
+      ]
+    ],
+    "takeaway": "记住：一块校验盘节省空间、帮助恢复一块坏盘，也集中了承担校验更新的写负载。",
+    "walkthrough_insertions": [
+      {
+        "after": 1,
+        "type": "code",
+        "text": "# 自编：两位二进制 XOR\nA = 10\nB = 11\nP = A XOR B = 01\nB_missing = A XOR P = 11"
+      }
+    ]
+  },
+  {
+    "id": "C06",
+    "title": "RAID 5：把校验块的负担分散到各盘",
+    "source_pages": [
+      13
+    ],
+    "index_terms": [
+      "distributed parity",
+      "RAID 5"
+    ],
+    "walkthrough": [
+      [
+        "中文理解：改位置，不改校验关系",
+        "RAID 5 仍然为每条带保存一份 XOR 校验，但校验块随条带分布到不同磁盘。图中的灰块轮换位置，所以不存在一块专门承接所有校验更新的盘。分散校验缓解的是 RAID 4 的集中写入负载。"
+      ],
+      [
+        "容量、性能与例子",
+        "N+1 块等容量盘提供约 N 块盘的可用容量。自编例：4 块 4 TB 盘，N=3，可用容量约 12 TB。数据访问仍可利用条带并行；校验更新开销仍存在，性能提升取决于负载，并非任何一次写入都更快。"
+      ],
+      [
+        "易错点与边界",
+        "校验分布在多块盘上，不代表每条带有多条独立校验方程；RAID 5 仍然只保证单盘失效恢复。若同一条带有两个未知数据块，一份 XOR 校验通常不足以唯一解出它们。"
+      ]
+    ],
+    "english": "RAID 5 distributes parity blocks across the disks instead of using a dedicated parity disk. This spreads parity-update traffic across different stripes and avoids RAID 4's single parity-disk hotspot. It still stores one parity block per stripe, requires N+1 disks for N disks' worth of data, and tolerates one disk failure. Distributed parity does not remove update overhead or provide two-disk fault tolerance.",
+    "questions": [
+      [
+        "Q1. What does RAID 5 improve over RAID 4?",
+        "It distributes parity blocks for different stripes across disks, spreading parity-update traffic. This avoids concentrating all parity writes on one dedicated disk, although parity still has to be maintained."
+      ],
+      [
+        "Q2. Does distributing parity allow recovery from two disk failures?",
+        "No. Each stripe still has only one independent XOR parity relation. Two missing blocks in a stripe generally cannot be uniquely reconstructed from that single relation."
+      ]
+    ],
+    "takeaway": "记住：RAID 5 改变校验放在哪里；单条带的校验信息量和单盘容错级别没有因此增加。",
+    "walkthrough_insertions": [
+      {
+        "after": 0,
+        "type": "code",
+        "text": "# 自编四盘布局；P 为校验，D 为数据块\n         disk_1  disk_2  disk_3  disk_4\nstripe_1 P1      D1a     D1b     D1c\nstripe_2 D2a     P2      D2b     D2c\nstripe_3 D3a     D3b     P3      D3c"
+      }
+    ]
+  },
+  {
+    "id": "C07",
+    "title": "方案取舍、相关故障与简答组织",
+    "source_pages": [
+      1,
+      14
+    ],
+    "index_terms": [
+      "correlated failure",
+      "redundancy",
+      "reliability",
+      "tradeoff"
+    ],
+    "walkthrough": [
+      [
+        "中文理解：可靠性是系统取舍",
+        "在相同单盘失效假设下，镜像用完整副本换取恢复能力；单校验方案节省空间，但引入校验维护和恢复工作。RAID 5 分散 RAID 4 的校验写入热点，却没有因此增加每条带的独立校验信息。"
+      ],
+      [
+        "自编概率例：先声明独立性",
+        "如果同一时间窗口内两个镜像成员分别以 p=0.01 的概率失效，且相互独立，则同时失效概率为 p²=0.0001。若共享电源、操作错误或软件缺陷造成共同故障，就不能直接用乘法。"
+      ],
+      [
+        "答题方法：目标、机制、代价、边界",
+        "选择方案时说明要承受的故障、需要的容量、读写负载以及恢复要求，再给出取舍。不能把“有 RAID”写成“无需备份”，也不能把一次组件失效自动当作整个服务已经失败。"
+      ]
+    ],
+    "english": "A storage design should be evaluated against its fault model, capacity cost, access workload and recovery requirements. RAID 5 spreads parity traffic but still provides only single-disk fault tolerance. Redundancy does not eliminate correlated failures, and mirrored or parity-protected data is not a substitute for independent backup. State the assumptions before comparing reliability or multiplying failure probabilities.",
+    "questions": [
+      [
+        "Q1. Why might two replicas fail together?",
+        "They may share a power supply, environment, software defect or erroneous operation. Such common causes violate the independence assumption used in a simple product of failure probabilities."
+      ],
+      [
+        "Q2. How should a concise design-choice answer be organized?",
+        "State the fault model and objective first. Then explain the mechanism, its capacity or performance cost, and an important limitation; make the choice conditional on the workload and assumptions."
+      ]
+    ],
+    "takeaway": "记住：最好的答案会说明方案成立的条件，而不只是给出一个 RAID 编号。",
+    "walkthrough_insertions": [
+      {
+        "after": 1,
+        "type": "code",
+        "text": "# 自编例；同一时间窗口，且假设独立\np = 0.01\nP(both fail) = p * p = 0.0001\ncommon cause -> independence is not justified"
+      },
+      {
+        "after": 2,
+        "type": "table",
+        "headers": [
+          "方案",
+          "物理盘数 / 可用容量",
+          "核心取舍"
+        ],
+        "rows": [
+          [
+            "RAID 1",
+            "2N / N×C",
+            "完整副本，空间开销高"
+          ],
+          [
+            "RAID 4",
+            "N+1 / N×C",
+            "专用校验盘集中写入"
+          ],
+          [
+            "RAID 5",
+            "N+1 / N×C",
+            "分散校验，但仍需维护"
+          ]
+        ]
+      }
+    ]
+  }
+]

@@ -17,12 +17,14 @@ from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib.colors import HexColor
 from reportlab.lib.pagesizes import A4, letter
 from reportlab.lib.styles import ParagraphStyle
-from reportlab.platypus import Paragraph, Table, TableStyle
+from reportlab.platypus import Paragraph, Table, TableStyle, Spacer, PageBreak, BaseDocTemplate, PageTemplate, Frame
+from reportlab.platypus.tableofcontents import TableOfContents, SimpleIndex
 
 ROOT = Path(__file__).resolve().parents[1]
 INK = '#203b34'
 SOURCE = json.loads((ROOT/'examples/source.json').read_text(encoding='utf-8'))
 CONTENT = json.loads((ROOT/'examples/demo-content.json').read_text(encoding='utf-8'))
+EXAM = json.loads((ROOT/'examples/exam-content.json').read_text(encoding='utf-8'))
 
 
 def paragraph(canvas, text, y, width, x=34, size=10.5, leading=15, bold=False, gap=5):
@@ -34,11 +36,11 @@ def paragraph(canvas, text, y, width, x=34, size=10.5, leading=15, bold=False, g
     return y-height-gap
 
 
-def walkthrough_flows(item, width):
+def technical_flows(item, width, exam=False):
     """Readable technical notes: prose, numbered headings, code, tables and a takeaway."""
-    style=ParagraphStyle('walk-body',fontName='CN',fontSize=11.5,leading=18,
-                         wordWrap='CJK',textColor=HexColor('#20262D'),spaceAfter=8)
-    heading=ParagraphStyle('walk-heading',parent=style,fontName='CN-Bold',fontSize=12,leading=19,spaceBefore=7,spaceAfter=6)
+    style=ParagraphStyle('walk-body',fontName='CN',fontSize=10.5 if exam else 11.5,leading=15.5 if exam else 18,
+                         wordWrap='CJK',textColor=HexColor('#20262D'),spaceAfter=6 if exam else 8)
+    heading=ParagraphStyle('walk-heading',parent=style,fontName='CN-Bold',fontSize=11 if exam else 12,leading=17 if exam else 19,spaceBefore=6 if exam else 7,spaceAfter=5 if exam else 6,keepWithNext=True)
     title=ParagraphStyle('walk-title',parent=heading,fontSize=15,leading=23,textColor=HexColor('#146B72'),spaceBefore=0,spaceAfter=10)
     cell=ParagraphStyle('walk-cell',parent=style,fontSize=10.5,leading=16,spaceAfter=0)
     th=ParagraphStyle('walk-table-heading',parent=cell,fontName='CN-Bold')
@@ -55,9 +57,16 @@ def walkthrough_flows(item, width):
         rich=''.join('<font name="Code">'+code_text(p[1:-1])+'</font>' if p.startswith('`') else escape(p) for p in pieces)
         return Paragraph(rich,selected)
 
-    flows=[text(item['title'],title)]
+    title_text=escape((item['id']+'  ' if exam else '')+item['title'])
+    if exam:title_text+=''.join('<index item="'+escape(term,{'"':'&quot;'})+'"/>' for term in item['index_terms'])
+    flows=[Paragraph(title_text,title)]
+    if exam:
+        flows[0].toc_key=item['id'];flows[0].toc_title=item['id']+'  '+item['title']
+        flows[0].source_pages=', '.join(map(str,item['source_pages']))
+        source_line=text('来源：原课件 p.'+flows[0].source_pages+'；标题页的补充依据为官方 Lecture 14 Outline。',cell)
+        source_line.keepWithNext=True;flows.append(source_line)
     for index,(label,body) in enumerate(item['walkthrough']):
-        if index:flows.append(text(label,heading))
+        if index or exam:flows.append(text(label,heading))
         flows.append(text(body))
         for block in item.get('walkthrough_insertions',[]):
             if block['after']!=index:continue
@@ -67,12 +76,17 @@ def walkthrough_flows(item, width):
                     ('LEFTPADDING',(0,0),(-1,-1),11),('RIGHTPADDING',(0,0),(-1,-1),11),('TOPPADDING',(0,0),(-1,-1),10),('BOTTOMPADDING',(0,0),(-1,-1),10)]))
             elif block['type']=='table':
                 rows=[[text(value,th if index==0 else cell) for value in row] for index,row in enumerate([block['headers'],*block['rows']])]
-                box=Table(rows,colWidths=[width*.38,width*.62])
+                box=Table(rows,colWidths=[width*.38,width*.62] if len(block['headers'])==2 else [width*.2,width*.3,width*.5])
                 box.setStyle(TableStyle([('VALIGN',(0,0),(-1,-1),'TOP'),('BACKGROUND',(0,0),(-1,0),HexColor('#F5F7F7')),
                     ('LINEBELOW',(0,0),(-1,-1),.4,HexColor('#D9E1E3')),('LEFTPADDING',(0,0),(-1,-1),7),('RIGHTPADDING',(0,0),(-1,-1),7),
                     ('TOPPADDING',(0,0),(-1,-1),7),('BOTTOMPADDING',(0,0),(-1,-1),7)]))
             else:raise ValueError('Unknown walkthrough block: '+block['type'])
-            box.spaceAfter=10;flows.append(box)
+            box.spaceAfter=8 if exam else 10;flows.append(box)
+    if exam:
+        flows.extend([text('考试英文表述',heading),text(item['english'])])
+        for question,answer in item['questions']:
+            flows.extend([text(question,heading),text(answer)])
+        flows[-1].keepWithNext=True
     box=Table([[text(item['takeaway'],tip)]],colWidths=[width])
     box.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),HexColor('#EAF5F4')),('LEFTPADDING',(0,0),(-1,-1),11),('RIGHTPADDING',(0,0),(-1,-1),11),('TOPPADDING',(0,0),(-1,-1),11),('BOTTOMPADDING',(0,0),(-1,-1),11)]))
     flows.append(box)
@@ -83,16 +97,16 @@ def canvas_for(path, size):
     canvas = Canvas(path if isinstance(path, BytesIO) else str(path), pagesize=size,
                     initialFontName='CN', initialFontSize=10.5)
     canvas.setAuthor('fuxi-pdf; source lecture: Katrina LaCurts / MIT OpenCourseWare')
-    canvas.setTitle('Real lecture demo: RAID 1, RAID 4 and RAID 5')
-    canvas.setSubject('Adapted educational excerpt; CC BY-NC-SA 4.0; not an official course handout')
+    canvas.setTitle('MIT 6.033 Lecture 14: full-lecture educational adaptation')
+    canvas.setSubject('CC BY-NC-SA 4.0; not an official course handout; original page 9 replaced with text')
     return canvas
 
 
 def footer(canvas, width, original, page, total):
     canvas.setFillColor(HexColor('#62746b'));canvas.setFont('CN', 7.2)
     canvas.drawString(34, 28, f'MIT 6.033 | Katrina LaCurts | Spring 2018 | 原课件 p.{original}')
-    canvas.drawRightString(width-34, 28, f'fuxi-pdf / {page} of {total}')
-    canvas.drawString(34, 16, 'CC BY-NC-SA 4.0 | 选页与中文讲解：fuxi-pdf | 非官方示例')
+    canvas.drawRightString(width-34, 28, f'fuxi-pdf / {page}'+(f' of {total}' if total else ''))
+    canvas.drawString(34, 16, 'CC BY-NC-SA 4.0 | 讲解与适配：fuxi-pdf | 非官方讲义')
     canvas.linkURL(SOURCE['resource_url'], (34, 26, width-130, 37), relative=0)
     canvas.linkURL(SOURCE['license_url'], (34, 13, 125, 24), relative=0)
 
@@ -104,8 +118,21 @@ def extract_source(full_pdf, output):
     assert len(reader.pages) == SOURCE['upstream_page_count']
     writer = PdfWriter()
     for number in SOURCE['selected_pages']:
-        writer.add_page(reader.pages[number-1])
-    writer.add_metadata({'/Title':'MIT 6.033 Lecture 14 - excerpt of original pages 11-13',
+        if number in SOURCE.get('replaced_pages',[]):
+            memory=BytesIO();canvas=canvas_for(memory,(1024,768))
+            y=paragraph(canvas,'Public adaptation / original page 9',710,910,x=55,size=28,leading=38,bold=True)
+            for line in ['Original vendor image omitted: it is explicitly excluded from the OCW Creative Commons license.',
+                         'Teaching point retained: a quoted MTBF is not an individual lifetime guarantee.',
+                         '700,000 hours / (24 x 365) = 79.91 years',
+                         'Illustrative aggregate estimate from the official lecture outline:',
+                         '1,000 disks x 3,000 hours / 4 failures = 750,000 device-hours per failure',
+                         'The aggregate example is hypothetical; it is not a claim about the vendor\'s actual test.',
+                         'View the original image in the official PDF linked in examples/source.json.']:
+                y=paragraph(canvas,line,y-18,910,x=55,size=19,leading=28)
+            canvas.setFont('CN',13);canvas.drawString(55,35,'Source lecture: Katrina LaCurts / MIT 6.033 / Spring 2018 / original p.9')
+            canvas.save();memory.seek(0);writer.add_page(PdfReader(memory).pages[0])
+        else:writer.add_page(reader.pages[number-1])
+    writer.add_metadata({'/Title':'MIT 6.033 Lecture 14 - all 15 pages, public adaptation; page 9 replaced',
                          '/Author':SOURCE['author'], '/Subject':SOURCE['resource_url']+' | '+SOURCE['license']})
     with output.open('wb') as handle:
         writer.write(handle)
@@ -118,14 +145,15 @@ def build_walkthrough(source, path):
     memory = BytesIO();canvas = canvas_for(memory,A4)
     transforms = []
     for page, (slide, item) in enumerate(zip(originals.pages,CONTENT),1):
+        if slide.rotation:slide.transfer_rotation_to_content()
         scale = usable/float(slide.mediabox.width)
         slide_height=float(slide.mediabox.height)*scale
-        flows=walkthrough_flows(item,usable)
+        flows=technical_flows(item,usable)
         sizes=[flow.wrap(usable,10000)[1] for flow in flows]
         body_height=sum(size+flow.getSpaceBefore()+flow.getSpaceAfter() for flow,size in zip(flows,sizes))
         height=max(minimum_height,math.ceil((43+slide_height+14+body_height+50)/(10*72/25.4))*(10*72/25.4))
         canvas.setPageSize((width,height))
-        paragraph(canvas, f'真实课件精讲 / 原页 {item["original_page"]} / 节选 {page} of {len(CONTENT)}', height-18, usable,size=9,leading=12)
+        paragraph(canvas, f'全讲精读 / 原页 {item["original_page"]}'+('（图片已替换为文字适配）' if item['original_page'] in SOURCE.get('replaced_pages',[]) else '')+f' / {page} of {len(CONTENT)}', height-18, usable,size=9,leading=12)
         slide_y=height-43-slide_height
         transforms.append(Transformation().scale(scale).translate(34,slide_y))
         canvas.setStrokeColor(HexColor('#D9E1E3'));canvas.setLineWidth(.5)
@@ -141,50 +169,74 @@ def build_walkthrough(source, path):
         writer.add_page(overlay)
         writer.pages[-1].merge_transformed_page(originals.pages[index],transforms[index])
         writer.add_outline_item(f'原页 {CONTENT[index]["original_page"]}: {CONTENT[index]["title"]}',index)
-    writer.add_metadata({'/Title':'真实课件逐页中文精讲：RAID', '/Author':'fuxi-pdf; Katrina LaCurts (source lecture)', '/Subject':SOURCE['license_url']})
+    writer.add_metadata({'/Title':'MIT 6.033 第14讲全讲逐页中文精讲', '/Author':'fuxi-pdf; Katrina LaCurts (source lecture)', '/Subject':SOURCE['license_url']+'; original page 9 adapted without the excluded vendor image'})
     with path.open('wb') as handle:
         writer.write(handle)
 
 
-def comparison(canvas,y,width):
-    rows=[['方案','物理盘数 / 可用容量','主要取舍'],
-          ['RAID 1','2N / N×C','完整镜像；容量开销大'],
-          ['RAID 4','N+1 / N×C','专用校验盘；写入集中'],
-          ['RAID 5','N+1 / N×C','分布校验；仍需更新校验']]
-    table=Table(rows,colWidths=[72,150,width-222],rowHeights=22)
-    table.setStyle(TableStyle([('FONTNAME',(0,0),(-1,-1),'CN'),('FONTSIZE',(0,0),(-1,-1),9),
-        ('BACKGROUND',(0,0),(-1,0),HexColor('#edf3ee')),('TEXTCOLOR',(0,0),(-1,-1),HexColor(INK)),
-        ('VALIGN',(0,0),(-1,-1),'MIDDLE'),('LINEBELOW',(0,0),(-1,-1),0.3,HexColor('#b8c5bd'))]))
-    _,h=table.wrap(width,1000);table.drawOn(canvas,34,y-h)
-    return y-h-5
-
-
 def build_exam(path):
-    width,height=letter;usable=width-68;canvas=canvas_for(path,letter)
-    for page,item in enumerate(CONTENT,1):
-        y=paragraph(canvas,item['title'],height-29,usable,size=16,leading=23,bold=True,gap=7)
-        y=paragraph(canvas,'考点册 / 中文理解 → English answers / 原页 '+str(item['original_page']),y,usable,size=9,leading=13,gap=10)
-        for heading,body in item['chinese']:
-            y=paragraph(canvas,heading,y,usable,bold=True)
-            y=paragraph(canvas,body,y,usable,gap=8)
-        y=paragraph(canvas,'考试英文表述',y,usable,bold=True)
-        y=paragraph(canvas,item['english'],y,usable,gap=9)
-        for question,answer in item['questions']:
-            y=paragraph(canvas,question,y,usable,bold=True)
-            y=paragraph(canvas,answer,y,usable,gap=8)
-        if page==3:
-            y=comparison(canvas,y-3,usable)
-            y=paragraph(canvas,'N：原始数据所需等容量盘数；C：单盘容量。三者均可恢复任意单盘失效；均不代替独立备份。',y,usable,size=9,leading=13)
-        assert y>44, ('Exam reference overflow',page,y)
-        canvas.bookmarkPage(str(page));canvas.addOutlineEntry(item['title'],str(page),level=0)
-        footer(canvas,width,item['original_page'],page,len(CONTENT));canvas.showPage()
-    canvas.save()
+    width,height=letter;usable=width-68
+    body=ParagraphStyle('exam-intro',fontName='CN',fontSize=10.5,leading=16,spaceAfter=10,textColor=HexColor('#20262D'),wordWrap='CJK')
+    title=ParagraphStyle('exam-front-title',parent=body,fontName='CN-Bold',fontSize=17,leading=25,textColor=HexColor('#146B72'),spaceAfter=14,keepWithNext=True)
+
+    class ExamDocument(BaseDocTemplate):
+        def __init__(self):
+            super().__init__(str(path),pagesize=letter,leftMargin=34,rightMargin=34,topMargin=32,bottomMargin=47,
+                             title='MIT 6.033 第14讲：完整考场重点资料',author='fuxi-pdf; source lecture: Katrina LaCurts',subject=SOURCE['license_url'])
+            self.addPageTemplates(PageTemplate(id='letter',frames=[Frame(34,47,usable,height-79,leftPadding=0,rightPadding=0,topPadding=0,bottomPadding=0)],
+                onPageEnd=lambda canv,doc: footer(canv,width,'1-15',doc.page,None)))
+        def beforeDocument(self):self.chapter_pages={}
+        def afterFlowable(self,flowable):
+            if hasattr(flowable,'toc_key'):
+                key=flowable.toc_key;self.chapter_pages[key]=self.page
+                self.canv.bookmarkPage(key);self.canv.addOutlineEntry(flowable.toc_title,key,0)
+                self.notify('TOCEntry',(0,flowable.toc_title,self.page,key))
+
+    def tagged_heading(label,key):
+        flow=Paragraph(escape(label),title);flow.toc_key=key;flow.toc_title=label
+        return flow
+
+    def make_story(known_pages):
+        toc=TableOfContents();toc.levelStyles=[ParagraphStyle('toc-line',parent=body,fontSize=10.5,leading=20,spaceAfter=3)]
+        toc.dotsMinLevel=0
+        index=SimpleIndex();index.setup(style=ParagraphStyle('index-line',parent=body,fontSize=10.5,leading=16,spaceAfter=2),headers=True,
+            tableStyle=TableStyle([('TOPPADDING',(0,0),(-1,-1),0),('BOTTOMPADDING',(0,0),(-1,-1),0)]))
+        story=[Paragraph('MIT 6.033 第14讲 · 考场重点资料',title),
+               Paragraph('Fault Tolerance: Reliability via Replication',body),
+               Paragraph('原课件：Katrina LaCurts / Spring 2018 / MIT OpenCourseWare。完整范围为原第 1-15 页及官方配套提纲；本册按考点整合，先中文理解，再给英文表述与自编短答。',body),
+               Paragraph('第 9 页的厂商图不在 OCW 开放许可内，公开适配版用文字替换；所有知识点仍予解释。目录与英文索引中的数字均为本册印刷页码。',body),
+               Paragraph('目录 / Contents',title),toc,Spacer(1,12),
+               Paragraph('使用方法：先按题意找到概念编号，检查故障模型和单位，再组织英文回答。不要把自编问答当作真题或官方答案。打印使用 Letter、100% 实际大小；考试允许的资料范围与页限以实际公告为准。',body),PageBreak()]
+        for item in EXAM:
+            story.extend(technical_flows(item,usable,exam=True));story.append(Spacer(1,14))
+        story.extend([PageBreak(),tagged_heading('英文术语索引 / English index','IDX'),
+                      Paragraph('按英文排序；页码指向对应概念的起始位置，可配合目录查找。',body),index,
+                      PageBreak(),tagged_heading('原页到考点的定位 / Source map','APP')])
+        rows=[[Paragraph(escape(v),body) for v in ['原页','主题','本册定位']]]
+        for item in CONTENT:
+            ids=[section['id'] for section in EXAM if item['original_page'] in section['source_pages']] or ['APP']
+            location='; '.join(key+' / p.'+str(known_pages.get(key,'?')) for key in ids)
+            rows.append([Paragraph(str(item['original_page']),body),Paragraph(escape(item['title']),body),Paragraph(location,body)])
+        mapping=Table(rows,colWidths=[45,usable-170,125],repeatRows=1)
+        mapping.setStyle(TableStyle([('VALIGN',(0,0),(-1,-1),'TOP'),('BACKGROUND',(0,0),(-1,0),HexColor('#F1F3F4')),
+            ('LINEBELOW',(0,0),(-1,-1),.4,HexColor('#D9E1E3')),('TOPPADDING',(0,0),(-1,-1),5),('BOTTOMPADDING',(0,0),(-1,-1),5)]))
+        story.extend([mapping,Spacer(1,12),Paragraph('补充依据：MIT OCW 官方 Lecture 14 Outline。原页 7 的提纲数值 .9997 是粗略记法；按给定数字复算为 0.99976857，保留四位小数应为 .9998。N 始终表示原始数据所需的等容量盘数，C 为单盘容量。',body)])
+        return story,index
+
+    known={}
+    for _ in range(3):
+        document=ExamDocument();story,index=make_story(known)
+        document.multiBuild(story,canvasmaker=index.getCanvasMaker())
+        if known==document.chapter_pages:break
+        known=document.chapter_pages.copy()
+    else:raise RuntimeError('Printed source-map page references did not stabilize.')
+    return dict(pages=document.page,chapter_pages=document.chapter_pages)
 
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--font',type=Path)
-    parser.add_argument('--source-pdf',type=Path,help='Re-extract inspected pages from the original 15-page lecture PDF')
+    parser.add_argument('--source-pdf',type=Path,help='Rebuild the public adaptation from the inspected original 15-page lecture PDF')
     args=parser.parse_args()
     candidates=[args.font,Path('C:/Windows/Fonts/msyh.ttc'),Path('/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc')]
     font=next((p for p in candidates if p and p.is_file()),None)
@@ -199,18 +251,22 @@ def main():
     for directory in (source.parent,walk.parent,ROOT/'docs/assets'):
         directory.mkdir(parents=True,exist_ok=True)
     if args.source_pdf:extract_source(args.source_pdf,source)
-    build_walkthrough(source,walk);build_exam(exam)
-    for path,name in [(walk,'walkthrough'),(exam,'exam-reference')]:
+    build_walkthrough(source,walk);exam_report=build_exam(exam)
+    for path,name,number in [(walk,'walkthrough',12),(exam,'exam-reference',exam_report['chapter_pages']['C02'])]:
         doc=pdfium.PdfDocument(str(path))
-        doc[1].render(scale=1.5).to_pil().save(ROOT/f'docs/assets/{name}.png');doc.close()
+        doc[number-1].render(scale=1.5).to_pil().save(ROOT/f'docs/assets/{name}.png');doc.close()
     source_id=SOURCE['source_id']
     (ROOT/'examples/inventory.json').write_text(json.dumps({source_id:len(CONTENT)},indent=2)+'\n',encoding='utf-8')
     columns='source_id lecture_id page_or_slide topic concept_id importance disposition summary_location explanation_depth visual_check citation notes'.split()
     with (ROOT/'examples/coverage.csv').open('w',encoding='utf-8-sig',newline='') as handle:
         writer=csv.DictWriter(handle,fieldnames=columns);writer.writeheader()
         for page,item in enumerate(CONTENT,1):
-            writer.writerow(dict(source_id=source_id,lecture_id='MIT6.033-L14',page_or_slide=page,topic=item['title'],disposition='covered',concept_id=item['concept'],importance='Demo selection, not an exam prediction',summary_location=f'slide-walkthrough.pdf p.{page}; exam-reference.pdf p.{page}',explanation_depth='Diagram, mechanism, example, limitations, English answers',visual_check='manual inspection required after rebuilding',citation=f'MIT 6.033 L14 original p.{item["original_page"]}',notes=f'Excerpt page {page}; original page {item["original_page"]}; only original pp.11-13 are in scope'))
-    print('Built 3 A4-width extended walkthrough pages, 3 Letter reference pages, two previews and the three-page excerpt ledger.')
+            ids=[section['id'] for section in EXAM if page in section['source_pages']] or ['APP']
+            locations='; '.join(key+' / p.'+str(exam_report['chapter_pages'][key]) for key in ids)
+            writer.writerow(dict(source_id=source_id,lecture_id='MIT6.033-L14',page_or_slide=page,topic=item['title'],disposition='administrative' if page==15 else 'covered',concept_id=item['concept'],importance='Full lecture, not an exam prediction',summary_location=f'slide-walkthrough.pdf p.{page}; exam-reference.pdf '+locations,explanation_depth='Chinese teaching, code/tables, conditions and English exam answers',visual_check='manual inspection required after rebuilding',citation=f'MIT 6.033 L14 original p.{page}; official outline where identified',notes=('Original p.9 vendor image replaced with a labeled text-only adaptation.' if page==9 else 'Original p.15 is the source/license page, retained in the walkthrough and mapped to the appendix.' if page==15 else 'Full-lecture page sequence retained.')))
+    report=dict(source_pages=len(CONTENT),walkthrough_pages=len(PdfReader(walk).pages),exam=exam_report,replaced_source_pages=SOURCE.get('replaced_pages',[]),preview_pages={'walkthrough':12,'exam_reference':exam_report['chapter_pages']['C02']})
+    (ROOT/'examples/build-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    print(json.dumps(report,ensure_ascii=False))
 
 
 if __name__=='__main__':main()

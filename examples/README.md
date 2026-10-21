@@ -1,47 +1,65 @@
-# 真实公开课件演示 / Real lecture demonstration
+# MIT 6.033 第14讲 · 完整双册示例
 
 来源：**Katrina LaCurts，MIT OpenCourseWare，6.033 Computer System Engineering，Spring 2018，Lecture 14: Fault Tolerance: Reliability via Replication**。
 
-本演示选取原课件 **第 11-13 页**，分别讲 RAID 1、RAID 4 与 RAID 5。选页构成一个连贯的小节；不声称覆盖整份 15 页课件。出处、选页范围和下载文件 SHA-256 见 [source.json](source.json)；中文与英文讲解源稿见 [demo-content.json](demo-content.json)。
+覆盖整讲原第 **1-15 页**，以及 [官方配套提纲](https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/pages/week-8/lecture-14-outline/) 中用于解释标题页的内容。包括封面、错误画面、转场页、正文、总结和许可页，不只截取 RAID 小节。
 
-| 文件 | 内容与纸张 |
+| 文件 | 内容 |
 | --- | --- |
-| [demo-slides.pdf](input/demo-slides.pdf) | 3 张完整原页，保留原图、署名和原页码 |
-| [slide-walkthrough.pdf](output/slide-walkthrough.pdf) | 3 页 A4 宽度竖版长页：原课件在上，下方用编号、代码框、表格与提示框精讲，带逐页书签 |
-| [exam-reference.pdf](output/exam-reference.pdf) | 3 页 Letter：中文机制与例子，英文核心表述及每页两道短答；末页有比较表 |
+| [demo-slides.pdf](input/demo-slides.pdf) | 15 页全讲公开适配版；原第 9 页厂商图改为明确标注的文字示意 |
+| [slide-walkthrough.pdf](output/slide-walkthrough.pdf) | 15 页中文精讲；原页在上，编号、代码框、表格与提示框在下；保留全部原页关联 |
+| [exam-reference.pdf](output/exam-reference.pdf) | 10 页标准 Letter cheatsheet；中文解释与推导后接英文表述及 14 道自编短答，含目录、英文索引和原页定位 |
+| [demo-content.json](demo-content.json) | 每一页的中文讲解和结构化排版内容 |
+| [exam-content.json](exam-content.json) | 7 个考点的中英内容及代码/表格 |
+| [source.json](source.json) | 作者、网址、原文件哈希、全部页码与第 9 页替换说明 |
+| [build-report.json](build-report.json) | 实际成品页数、目录定位与预览页 |
 
-原课件来自 [官方资源页](https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/resources/mit6_033s18lec14/)。演示讲解、补充例子和英文短答由本项目编写，不是官方答案或真题。预览使用成品第 2 页（RAID 4）。
+学习册用 A4 页宽与可变页高，正文约 11.5 pt，保证原页和完整讲解同页，适合屏幕阅读。它不是标准 A4 打印稿。Cheatsheet 用固定 Letter 纸张与约 10.5 pt 正文，支持自然续页，中文和英文都使用正常正文字体；代码与计算步骤使用等宽框。
 
-RAID 4 的自编 XOR 例子独立核算：`10 XOR 11 = 01`；丢失第二块后，`10 XOR 01 = 11`。三种方案的 N 均指原始数据需要的等容量盘数，C 为单盘容量；RAID 1 用 2N 块盘，RAID 4/5 用 N+1 块盘，三者可用容量约为 N×C。
+README 预览为精讲原第 12 页（RAID 4）与 cheatsheet 第 3 页（可用性）。
+
+## 七个考点
+
+1. C01：故障模型、识别、检测与限制、处理方式。
+2. C02：MTTF、MTTR、可用性公式、单位与手算。
+3. C03：磁盘失效、MTBF 的群体统计含义与年龄相关风险。
+4. C04：RAID 1 镜像、容量与容错边界。
+5. C05：RAID 4、XOR 恢复、专用校验盘瓶颈。
+6. C06：RAID 5、分布校验与未改变的单盘容错等级。
+7. C07：成本和性能取舍、相关故障、简洁英文回答的组织。
+
+讲解、补充例子和短答是本项目的教育改编，不是真题或官方答案。原页 7、8、10 等标题页会明确说明细节来自官方提纲。提纲中的可用性例子按给定数字复算为 `43200/43210 = 0.99976857`；提纲写的 `.9997` 是粗略记法，保留四位小数应为 `.9998`。
+
+## 原图与公开适配
+
+原第 9 页的 Seagate 厂商规格图明确排除在 OCW 的开放许可外。公开版用独立生成的文字页保留该位置与统计教学内容，不嵌入被排除的图片。其余 14 页保留原图；需要查看未经修改的原件时，使用 [官方完整 PDF](https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/8eb16d3628bbd77ee7e8471b9871ec09_MIT6_033S18lec14.pdf)。
 
 ## 复现
 
-安装仓库根目录的 `requirements-dev.txt`，然后：
+安装根目录的 `requirements-dev.txt` 后运行：
 
 ```sh
 python examples/build_demo.py --font /path/to/chinese-truetype-font.ttf
 ```
 
-脚本默认使用仓库中的真实课件节选，重建两册、README 预览与覆盖台账，不访问网络。Windows 安装 Microsoft YaHei 时可省略 `--font`。字体需为 ReportLab 支持的 TrueType `.ttf` 或 `.ttc`，不随仓库提供。代码优先使用系统已有的 Consolas 或 DejaVu Sans Mono，中文注释使用中文字体回退。
+默认使用仓库中的 15 页公开适配版，离线重建两册、目录、索引、预览与覆盖报告。Windows 已安装 Microsoft YaHei 时可省略 `--font`。字体需为 ReportLab 支持的 TrueType `.ttf` 或 `.ttc`；代码优先使用系统已有的 Consolas 或 DejaVu Sans Mono，中文注释使用中文字体回退，字体文件不随仓库分发。
 
-精讲用约 11.5 pt 正文、灰底等宽代码块、字段/状态表格与浅青提示框，按内容增加页高，保持一张原课件与完整讲解同页，适合屏幕阅读。它不是标准 A4 打印页；考场册仍使用固定 Letter 纸张。详细风格见 [逐页排版规范](../references/walkthrough-style.md)。
-
-如需从官方 PDF 重新提取三张原页，下载 [完整课件](https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/8eb16d3628bbd77ee7e8471b9871ec09_MIT6_033S18lec14.pdf)，再指定：
+如从下载的原文件重新生成公开适配版，运行：
 
 ```sh
 python examples/build_demo.py --source-pdf /path/to/MIT6_033S18lec14.pdf --font /path/to/chinese-truetype-font.ttf
 ```
 
-构建器先核对源文件哈希，防止版本变化后静默选错页。它是固定演示构建器，不负责自动总结任意课程。
+构建器先核对源文件哈希，再生成完整顺序并替换第 9 页。它是固定课程示例构建器，不是自动总结任意课程的 CLI。
 
 ```sh
 python scripts/validate_coverage.py examples/coverage.csv --inventory examples/inventory.json
 ```
 
-台账的 `page_or_slide` 为节选内的第 1-3 页；`citation` 与 `notes` 明确映射到原课件第 11-13 页。该验证只证明三页节选有去向，不证明整讲覆盖。
+台账按原第 1-15 页登记：14 页记为 covered，原第 15 页作为许可/出处页记为 administrative 并说明理由；逐页精讲仍保留它。每行同时定位学习册与考场册的概念编号和实际印刷页码。
 
-## 许可
+## 打印与许可
 
-真实课件节选、演示讲解、派生 PDF 和其 PNG 预览采用 [CC BY-NC-SA 4.0](../licenses/MIT-OCW-demo-LICENSE.md)。技能与构建代码仍采用根目录 MIT 许可。
+Cheatsheet：Letter，100% 实际大小，每面一页；单面 10 张，双面 5 张，沿长边翻转。是否允许携带及页数限制以实际考试规定为准。
 
-打印考场册：Letter，100% 实际大小，每面一页；单面 3 张，双面 2 张、沿长边翻转。这只是演示设置，是否允许携带及页数限制以实际考试规定为准。
+课程公开适配版、讲解、派生 PDF 和预览采用 [CC BY-NC-SA 4.0](../licenses/MIT-OCW-demo-LICENSE.md)；技能与构建代码仍采用 MIT 许可。

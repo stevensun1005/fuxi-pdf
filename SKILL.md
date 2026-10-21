@@ -31,7 +31,7 @@ description: 复习pdf：将 PDF/PPTX 课件、教材或提取文本制作成带
 
 语言按成品分别决定：逐页精讲默认中文教学，保留必要英文术语而不附整段英文复述；考场重点册默认每个考点先中文解释，再给可用于考试的英文表述。明确的语言要求始终优先，不把一种成品的双语要求套到另一种。
 
-逐页精讲默认采用理工科讲义版式：青色标题、编号小节、浅灰代码/伪代码块、字段或状态表格、浅青“记住”提示框。代码、数据和流程优先块状表达，概念正文保留自然中文；具体排版见 [walkthrough-style.md](references/walkthrough-style.md)。
+逐页精讲与 cheatsheet 默认采用理工科讲义版式：青色标题、编号小节、浅灰代码/伪代码块、字段或状态表格、浅青“记住”提示框。代码、数据和流程优先块状表达，概念正文与英文答案保留正常正文字体；cheatsheet 坚持标准打印纸张，具体排版见 [walkthrough-style.md](references/walkthrough-style.md)。
 
 默认必须生成 PDF 并保留可编辑源文件。用户选择 Typst 时保留 `.typ`，明确选择 Markdown 或仅聊天时尊重选择，不强制 PDF。语言细则见 [bilingual-writing.md](references/bilingual-writing.md)。
 

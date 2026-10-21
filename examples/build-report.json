@@ -1,0 +1,25 @@
+{
+  "source_pages": 15,
+  "walkthrough_pages": 15,
+  "exam": {
+    "pages": 10,
+    "chapter_pages": {
+      "C01": 2,
+      "C02": 3,
+      "C03": 4,
+      "C04": 5,
+      "C05": 6,
+      "C06": 6,
+      "C07": 7,
+      "IDX": 9,
+      "APP": 10
+    }
+  },
+  "replaced_source_pages": [
+    9
+  ],
+  "preview_pages": {
+    "walkthrough": 12,
+    "exam_reference": 3
+  }
+}

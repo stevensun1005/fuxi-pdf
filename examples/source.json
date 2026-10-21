@@ -1,5 +1,5 @@
 {
-  "source_id": "MIT6.033-L14-excerpt",
+  "source_id": "MIT6.033-L14",
   "title": "Fault Tolerance: Reliability via Replication",
   "course": "6.033 Computer System Engineering",
   "term": "Spring 2018",
@@ -13,6 +13,26 @@
   "retrieved": "2026-10-21",
   "upstream_page_count": 15,
   "upstream_sha256": "4f66a2623ddf91e55f6e11307b8df67cc2c88f4d20c0e4338ab24ba7f01b04ce",
-  "selected_pages": [11, 12, 13],
-  "changes": "Selected three complete pages without redrawing or cropping; added separate Chinese teaching and bilingual exam-reference adaptations. This is an excerpt, not the complete lecture. No endorsement is implied."
+  "selected_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "changes": "Full 15-page sequence. Original page 9 is replaced with an explicitly labeled text-only adaptation because its Seagate image is excluded from the OCW license. Other pages retain the original visual content. Chinese teaching and bilingual exam notes are independent educational adaptations, with official-outline supplements identified. No endorsement is implied.",
+  "replaced_pages": [
+    9
+  ],
+  "outline_url": "https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/pages/week-8/lecture-14-outline/"
 }

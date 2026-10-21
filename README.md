@@ -21,20 +21,22 @@
 | 版式 | 竖版阅读，原页与解释明确对应 | 标准纸张、灰度清楚、目录和术语索引 |
 | 语言 | 中文教学，保留必要英文术语 | 先理解中文，再练习英文回答 |
 
-逐页精讲采用理工科讲义风格：青色标题、编号小节、浅灰代码/伪代码块、字段与状态表格，以及“记住”提示框。适合运算、数据流和例子的内容用块状表达，中文正文负责讲清原理。
+逐页精讲与 cheatsheet 都采用理工科讲义风格：青色标题、编号小节、浅灰代码/伪代码块、字段与状态表格，以及“记住”提示框。适合运算、数据流和例子的内容用块状表达，中文正文负责讲清原理，英文答案保留正常正文字体。
 
 Cheatsheet 不默认等于一页。考试规定两页，就按两页设计；允许详细纸质资料时，优先保证内容和字号可读。它也不会把一份屏幕长页 PDF 直接当成打印册。
 
 ## 看一眼成品
 
-以下演示使用 **MIT OpenCourseWare 6.033（Spring 2018，Katrina LaCurts）第 14 讲的真实课件第 11–13 页**，依次解释 RAID 1、RAID 4 与 RAID 5。两册各 3 页：精讲为 A4 宽度竖版长页，考场册为标准 Letter；下图预览第 2 页的 RAID 4。选页保留完整原图，讲解由本项目编写，属于节选演示，不代表整讲覆盖或官方答案。
+以下演示使用 **MIT OpenCourseWare 6.033（Spring 2018，Katrina LaCurts）第 14 讲的完整 15 页课件及官方配套提纲**，覆盖故障模型、三步容错、可用性、MTBF、RAID 1/4/5 与可靠性取舍。逐页中文精讲共 **15 页竖版长页**；中英 cheatsheet 共 **10 页标准 Letter**，含 7 个考点、14 道自编英文短答、印刷目录、英文索引与原页定位表。
+
+公开适配版保留全讲顺序。第 9 页明确排除开放许可的厂商图片替换为标注清楚的文字示意，原版仍可从官网获取；其余 14 页保留原图。讲解和补充例子由本项目编写，不是官方答案。下图分别预览精讲原页 12（RAID 4）和 cheatsheet 第 3 页（可用性）。
 
 | 逐页中文精讲 | 可打印考场重点册 |
 | --- | --- |
 | ![逐页精讲实际预览](docs/assets/walkthrough.png) | ![考场重点册实际预览](docs/assets/exam-reference.png) |
 | [打开学习册 PDF](examples/output/slide-walkthrough.pdf) | [打开考场册 PDF](examples/output/exam-reference.pdf) |
 
-[真实课件节选](examples/input/demo-slides.pdf) · [官方课件来源](https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/resources/mit6_033s18lec14/) · [演示说明与复现](examples/README.md)
+[全讲公开适配版](examples/input/demo-slides.pdf) · [官方课件来源](https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/resources/mit6_033s18lec14/) · [演示说明与复现](examples/README.md)
 
 ## 安装
 
@@ -126,4 +128,4 @@ GitHub Actions 在 Python 3.11、3.13 上执行元数据、链接、覆盖脚本
 
 ## 许可
 
-技能与构建代码采用 [MIT License](LICENSE)。真实课件节选、演示讲解与其 PDF/预览采用 [CC BY-NC-SA 4.0](licenses/MIT-OCW-demo-LICENSE.md)。其他素材声明见 [许可说明](references/sources.md)。
+技能与构建代码采用 [MIT License](LICENSE)。真实课件公开适配版、演示讲解与其 PDF/预览采用 [CC BY-NC-SA 4.0](licenses/MIT-OCW-demo-LICENSE.md)。其他素材声明见 [许可说明](references/sources.md)。

@@ -54,7 +54,9 @@ The skill preserves editable sources, source-page references and a coverage ledg
 
 ## Inspect the examples
 
-The demo uses three real slides (original pages 11-13) from Katrina LaCurts' MIT OpenCourseWare 6.033, Spring 2018, Lecture 14: RAID 1, RAID 4 and RAID 5. It includes the [source excerpt](examples/input/demo-slides.pdf), a three-page [Chinese walkthrough](examples/output/slide-walkthrough.pdf), and a three-page [printable bilingual reference](examples/output/exam-reference.pdf). Preview images show page 2 (RAID 4). These are independently written educational adaptations of a selected passage, not a full-lecture guide or official answers. See the [official resource](https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/resources/mit6_033s18lec14/) and [reproduction instructions](examples/README.md).
+The demo covers all 15 pages of Katrina LaCurts' MIT OpenCourseWare 6.033, Spring 2018, Lecture 14 and its official companion outline: fault models, fault-tolerance design, availability, MTBF, RAID 1/4/5 and reliability tradeoffs. It includes a [15-page public source adaptation](examples/input/demo-slides.pdf), a [15-page Chinese walkthrough](examples/output/slide-walkthrough.pdf), and a [10-page Letter cheatsheet](examples/output/exam-reference.pdf) with seven concept chapters, fourteen original English short-answer examples, a printed contents page, an English index and a source map.
+
+The vendor image on original page 9 is explicitly excluded from the OCW license, so that page is replaced with a clearly labeled text-only adaptation; the other fourteen pages retain their original visuals. The complete unmodified source is available from the [official resource](https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/resources/mit6_033s18lec14/). These are independently written learning materials, not official answers. Previews show walkthrough page 12 and cheatsheet page 3. See [reproduction instructions](examples/README.md).
 
 ## Validate
 
@@ -73,4 +75,4 @@ GitHub Actions runs package and test checks on Python 3.11 and 3.13. This is an 
 
 ## License
 
-Skill and build code are [MIT licensed](LICENSE). The real lecture excerpt, demo teaching content, derived PDFs and their previews are [CC BY-NC-SA 4.0](licenses/MIT-OCW-demo-LICENSE.md). Other copyright and license notices are documented in [license notes](references/sources.md).
+Skill and build code are [MIT licensed](LICENSE). The real lecture public adaptation, demo teaching content, derived PDFs and their previews are [CC BY-NC-SA 4.0](licenses/MIT-OCW-demo-LICENSE.md). Other copyright and license notices are documented in [license notes](references/sources.md).

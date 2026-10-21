@@ -67,6 +67,6 @@ Inventory format: `{"Lecture01": 30}`. Without an inventory, the validator check
 
 GitHub Actions runs package and test checks on Python 3.11 and 3.13. This is an agent skill and template package, not a standalone automatic course-generation CLI.
 
-## Attribution
+## License
 
-Original work is [MIT licensed](LICENSE). Retained MIT templates and upstream acknowledgments are documented in [sources.md](references/sources.md), with notices under `licenses/`. No course slides, private study notes or font files are distributed.
+This project is [MIT licensed](LICENSE). Copyright and license notices for third-party materials are documented in [license notes](references/sources.md).

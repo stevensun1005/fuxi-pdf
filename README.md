@@ -121,6 +121,6 @@ GitHub Actions 在 Python 3.11、3.13 上执行元数据、链接、覆盖脚本
 
 本次实际执行的编译与视觉检查范围见 [验证记录](docs/validation.md)。
 
-## 来源与许可
+## 许可
 
-原创实现采用 [MIT License](LICENSE)。致谢 [NovaForge](https://github.com/SiriusFzh/NovaForge)、[summarize-slides-skill](https://github.com/Li-Baichuan-James/summarize-slides-skill) 与 [final-review-slides](https://github.com/chowkayee11/final-review-slides) 的教学和整理思路。第三方模板保留各自 MIT 署名；无授权声明的复制文件未纳入公开版。详见 [来源与公开版整理](references/sources.md)。
+本项目采用 [MIT License](LICENSE)。第三方素材的版权与许可声明见 [许可说明](references/sources.md)。

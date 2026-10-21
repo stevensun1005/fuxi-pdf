@@ -19,3 +19,4 @@ jobs:
       - run: python tools/check_package.py
       - run: python -m unittest discover -s tests -v
       - run: python scripts/validate_coverage.py examples/coverage.csv --inventory examples/inventory.json
+      - run: python scripts/validate_coverage.py examples/compact-math/coverage.csv --inventory examples/compact-math/inventory.json

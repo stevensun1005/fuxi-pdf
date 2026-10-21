@@ -42,6 +42,16 @@
 
 [全讲公开适配版](examples/input/demo-slides.pdf) · [官方课件来源](https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/resources/mit6_033s18lec14/) · [演示说明与复现](examples/README.md)
 
+## 单页紧凑示例：数学课近半学期
+
+另选 **MIT 18.06SC 线性代数**的前半段主题，覆盖几何、消元、子空间、投影、最小二乘与行列式。21 份真实讲义、85 个源页压缩为 **1 个 Letter 横向打印面**，四栏、黑蓝红三色，20 个检索小节，先中文短解再英文答题句。
+
+[打开单页 PDF](examples/compact-math/cheatsheet.pdf) · [源稿、来源与复现说明](examples/compact-math/README.md)
+
+![单页数学 cheatsheet 实际预览](examples/compact-math/preview.png)
+
+这是接近半学期主题的选段示例，不是官方期中范围；省略完整证明和多数原例，具体取舍有台账。上面的计算机系统 10 页详细册与这里的单页紧凑版各自展示一种成品密度。
+
 ## 安装
 
 将本仓库放进 Codex 的技能目录，目录名保留 `fuxi-pdf`。仓库根目录就是技能入口，无需再找子目录。
@@ -132,4 +142,4 @@ GitHub Actions 在 Python 3.11、3.13 上执行元数据、链接、覆盖脚本
 
 ## 许可
 
-技能与构建代码采用 [MIT License](LICENSE)。真实课件公开适配版、演示讲解与其 PDF/预览采用 [CC BY-NC-SA 4.0](licenses/MIT-OCW-demo-LICENSE.md)。其他素材声明见 [许可说明](references/sources.md)。
+技能与构建代码采用 [MIT License](LICENSE)。真实课件公开适配版、演示讲解与其 PDF/预览采用 [CC BY-NC-SA 4.0](licenses/MIT-OCW-demo-LICENSE.md)。线性代数紧凑示例另见 [数学示例许可](licenses/MIT-OCW-math-LICENSE.md)。其他素材声明见 [许可说明](references/sources.md)。

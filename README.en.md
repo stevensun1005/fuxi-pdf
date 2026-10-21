@@ -62,6 +62,16 @@ The demo covers all 15 pages of Katrina LaCurts' MIT OpenCourseWare 6.033, Sprin
 
 The vendor image on original page 9 is explicitly excluded from the OCW license, so that page is replaced with a clearly labeled text-only adaptation; the other fourteen pages retain their original visuals. The complete unmodified source is available from the [official resource](https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/resources/mit6_033s18lec14/). These are independently written learning materials, not official answers. Previews show walkthrough page 12 and cheatsheet page 3. See [reproduction instructions](examples/README.md).
 
+## One-page compact mathematics example
+
+A separate example condenses a first-half topic selection from **MIT OCW 18.06SC Linear Algebra (Fall 2011, Gilbert Strang)** into one landscape Letter face: 21 lecture summaries, 85 source pages, and 20 compact sections covering systems, subspaces, orthogonality, least squares and determinants. It uses four columns and semantic black/blue/red, with Chinese explanations followed by English answer cues.
+
+[One-page PDF](examples/compact-math/cheatsheet.pdf) · [Editable source, provenance and reproduction](examples/compact-math/README.md)
+
+![Compact mathematics preview](examples/compact-math/preview.png)
+
+This approximates a half-semester topic range, not an official midterm scope. Proofs and most worked examples are omitted explicitly. It demonstrates a different density from the ten-page detailed computer-systems booklet.
+
 ## Validate
 
 The walkthrough uses A4-width extended pages to keep each slide with its complete explanation. The exam reference uses standard Letter pages for printing.
@@ -79,4 +89,4 @@ GitHub Actions runs package and test checks on Python 3.11 and 3.13. This is an 
 
 ## License
 
-Skill and build code are [MIT licensed](LICENSE). The real lecture public adaptation, demo teaching content, derived PDFs and their previews are [CC BY-NC-SA 4.0](licenses/MIT-OCW-demo-LICENSE.md). Other copyright and license notices are documented in [license notes](references/sources.md).
+Skill and build code are [MIT licensed](LICENSE). The real lecture public adaptation, demo teaching content, derived PDFs and their previews are [CC BY-NC-SA 4.0](licenses/MIT-OCW-demo-LICENSE.md). The compact linear-algebra adaptation has its own [CC BY-NC-SA 4.0 notice](licenses/MIT-OCW-math-LICENSE.md). Other copyright and license notices are documented in [license notes](references/sources.md).

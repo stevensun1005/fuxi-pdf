@@ -1,5 +1,7 @@
 # MIT 6.033 第14讲 · 完整双册示例
 
+另有独立的 [单页紧凑数学示例](compact-math/README.md)：线性代数近半学期主题，四栏三色；下文保留计算机系统全讲精讲与不限页详细考场册示例。
+
 来源：**Katrina LaCurts，MIT OpenCourseWare，6.033 Computer System Engineering，Spring 2018，Lecture 14: Fault Tolerance: Reliability via Replication**。
 
 覆盖整讲原第 **1-15 页**，以及 [官方配套提纲](https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/pages/week-8/lecture-14-outline/) 中用于解释标题页的内容。包括封面、错误画面、转场页、正文、总结和许可页，不只截取 RAID 小节。

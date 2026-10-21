@@ -1,0 +1,255 @@
+{
+  "course": "MIT 18.06SC Linear Algebra, Fall 2011",
+  "instructor": "Gilbert Strang",
+  "index_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/resource-index/",
+  "retrieved": "2026-10-21",
+  "sources": [
+    {
+      "source_id": "S01",
+      "title": "The Geometry of Linear Equations",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses1-1sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/6913aa2f37dada8fdda334168b30339b_MIT18_06SCF11_Ses1.1sum.pdf",
+      "sha256": "bde3d194d02b96e787e1d95c9f9f64fc56910ed1b7ea9e059114baa5ace5ee23",
+      "pages": 4,
+      "summary_sections": [
+        "01"
+      ]
+    },
+    {
+      "source_id": "S02",
+      "title": "An Overview of Key Ideas",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses1-13sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/ca8b2f24428c3ab6c74757ae5ff5056b_MIT18_06SCF11_Ses1.13sum.pdf",
+      "sha256": "43e69ce492271fe9ab551ae61c7c8cfdea741d1c3582514b182d58ce0b93659f",
+      "pages": 5,
+      "summary_sections": [
+        "01",
+        "04",
+        "05"
+      ]
+    },
+    {
+      "source_id": "S03",
+      "title": "Elimination with Matrices",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses1-2sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/0903b4b404284cd14b66ecccea103fd4_MIT18_06SCF11_Ses1.2sum.pdf",
+      "sha256": "efa7736420e1f8fe2267f9ba360b48bd5ae151ebe0063f39e2a3d91d4e9922dd",
+      "pages": 4,
+      "summary_sections": [
+        "03"
+      ]
+    },
+    {
+      "source_id": "S04",
+      "title": "Multiplication and Inverse Matrices",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses1-3sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/1963da71c4d96e5d14e7939780f79bcc_MIT18_06SCF11_Ses1.3sum.pdf",
+      "sha256": "c33d0b6e28e874947062997d4014bc4b5e03b7e6bdf54e80e4435f1fb919eca6",
+      "pages": 4,
+      "summary_sections": [
+        "02",
+        "04"
+      ]
+    },
+    {
+      "source_id": "S05",
+      "title": "Factorization into A = LU",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses1-4sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/c5961452fbb31f8a0b34ecd0ffc5cdc4_MIT18_06SCF11_Ses1.4sum.pdf",
+      "sha256": "743ea7d3542987e4591783462c2eca84dbf4976d2980dda0a3181e0b2fd1475b",
+      "pages": 4,
+      "summary_sections": [
+        "02",
+        "03"
+      ]
+    },
+    {
+      "source_id": "S06",
+      "title": "Transposes, Permutations, Vector Spaces",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses1-5sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/33b21afab62ea8df6c7bd241240df60d_MIT18_06SCF11_Ses1.5sum.pdf",
+      "sha256": "663fc7f539a1e47514e213516a971c2361957ed1349752fcf6f1eeef390e28f6",
+      "pages": 3,
+      "summary_sections": [
+        "03",
+        "05"
+      ]
+    },
+    {
+      "source_id": "S07",
+      "title": "Column Space and Nullspace",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses1-6sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/a9361fe289da445a7ca1fe2f88b55ca7_MIT18_06SCF11_Ses1.6sum.pdf",
+      "sha256": "781348b0ae3190cafb037e9578961a945ab1937b12aca9fc19540e4b7eb3eb96",
+      "pages": 3,
+      "summary_sections": [
+        "01",
+        "05",
+        "07"
+      ]
+    },
+    {
+      "source_id": "S08",
+      "title": "Solving Ax = 0: Pivot Variables, Special Solutions",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses1-7sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/dddb31dfe72d2e2e2fd09e74713b7775_MIT18_06SCF11_Ses1.7sum.pdf",
+      "sha256": "8ed8e07e230fe8c77ff01588677eb2912cce3bb1bb62cdcab1f661ed941142a3",
+      "pages": 3,
+      "summary_sections": [
+        "06"
+      ]
+    },
+    {
+      "source_id": "S09",
+      "title": "Solving Ax = b: Row Reduced Form R",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses1-8sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/f5a74578196a8afc2fd2ba8581acb17f_MIT18_06SCF11_Ses1.8sum.pdf",
+      "sha256": "e0ceffc569fe263f6c0f27e03aca0c91d8cd997af0e201df580fb866b1f10ab6",
+      "pages": 4,
+      "summary_sections": [
+        "07"
+      ]
+    },
+    {
+      "source_id": "S10",
+      "title": "Independence, Basis and Dimension",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses1-9sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/0bbc30e3f1d7933ea07a2d2e9ab050d9_MIT18_06SCF11_Ses1.9sum.pdf",
+      "sha256": "fbde117b7b213293cbf4957266ac6ba953a44ce7101afc45c794bbfb157ca53f",
+      "pages": 4,
+      "summary_sections": [
+        "08"
+      ]
+    },
+    {
+      "source_id": "S11",
+      "title": "The Four Fundamental Subspaces",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses1-10sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/62a9db9eeab190694d40afe4734068ca_MIT18_06SCF11_Ses1.10sum.pdf",
+      "sha256": "d5861a2f4f16c48377391661729b711d70afeb1edd3f7a07f25b403029947164",
+      "pages": 4,
+      "summary_sections": [
+        "09",
+        "10"
+      ]
+    },
+    {
+      "source_id": "S12",
+      "title": "Matrix Spaces; Rank 1; Small World Graphs",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses1-11sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/732789d4b5c1247ccab5faf13b6f29d2_MIT18_06SCF11_Ses1.11sum.pdf",
+      "sha256": "4dd9f7df93dfa87cb2712804428faeeebd3db2279c2e78b54081651c551faf82",
+      "pages": 4,
+      "summary_sections": [
+        "10",
+        "11"
+      ]
+    },
+    {
+      "source_id": "S13",
+      "title": "Graphs, Networks, Incidence Matrices",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses1-12sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/d71b25b942dd3dec0ede49d712deb4b0_MIT18_06SCF11_Ses1.12sum.pdf",
+      "sha256": "5d2ddbd64a297e1f55488fee93e8d7498bbc43290dd8d62e2e487dfcb5afa1e9",
+      "pages": 5,
+      "summary_sections": [
+        "11"
+      ]
+    },
+    {
+      "source_id": "S14",
+      "title": "Exam 1 Review",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses1-14sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/b547dd4153ccc350860df8f43085c2d6_MIT18_06SCF11_Ses1.14sum.pdf",
+      "sha256": "aecd2568e6b0701435d98c79c5cb408024e90b8abb103082b5b38193dfb5691e",
+      "pages": 6,
+      "summary_sections": [
+        "20"
+      ]
+    },
+    {
+      "source_id": "S15",
+      "title": "Orthogonal Vectors and Subspaces",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses2-1sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/fdce42d9c8d8dc4eac7a9db3c1978e18_MIT18_06SCF11_Ses2.1sum.pdf",
+      "sha256": "072b7a96bf2c95731acaa18092f3a06e6e6777540834da1119c8a8a6457501ff",
+      "pages": 3,
+      "summary_sections": [
+        "09",
+        "12"
+      ]
+    },
+    {
+      "source_id": "S16",
+      "title": "Projections onto Subspaces",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses2-2sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/00e9c8f0eafedeab21a3d079a17ed3d8_MIT18_06SCF11_Ses2.2sum.pdf",
+      "sha256": "f4fb4cfb984123331a44ade66a8755767ec0369540b8acde7ab19bd299e7ca65",
+      "pages": 4,
+      "summary_sections": [
+        "13",
+        "14"
+      ]
+    },
+    {
+      "source_id": "S17",
+      "title": "Projection Matrices and Least Squares",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses2-3sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/198bde3a6536b62989b6cc09495575c1_MIT18_06SCF11_Ses2.3sum.pdf",
+      "sha256": "2f4b442d3b9b2cb1047b4170388a8a6b6f17f210544e3c1463b2c4987f12d64a",
+      "pages": 4,
+      "summary_sections": [
+        "12",
+        "13",
+        "14"
+      ]
+    },
+    {
+      "source_id": "S18",
+      "title": "Orthogonal Matrices and Gram-Schmidt",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses2-4sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/7ac32be444c25e48590f47573833ccc6_MIT18_06SCF11_Ses2.4sum.pdf",
+      "sha256": "1150e59137ced6e2e8ba0cfb2736f7422accbb43ca5be15177a386057f943f67",
+      "pages": 4,
+      "summary_sections": [
+        "15",
+        "16"
+      ]
+    },
+    {
+      "source_id": "S19",
+      "title": "Properties of Determinants",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses2-5sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/5dd3f8ec0a398fd74264fef3fd591f81_MIT18_06SCF11_Ses2.5sum.pdf",
+      "sha256": "aea16eae29ec03cfc3bda4d8c0019d55b56e839d490ecddde62b2e2caeda27bc",
+      "pages": 4,
+      "summary_sections": [
+        "04",
+        "17"
+      ]
+    },
+    {
+      "source_id": "S20",
+      "title": "Determinant Formulas and Cofactors",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses2-6sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/cc79f04d92ee282758780bac2ec5e403_MIT18_06SCF11_Ses2.6sum.pdf",
+      "sha256": "ee780a63031f19a66e87d248cc513feb5988489ec4c0542a05e41f6f1ee739c2",
+      "pages": 4,
+      "summary_sections": [
+        "18"
+      ]
+    },
+    {
+      "source_id": "S21",
+      "title": "Cramer’s Rule, Inverse Matrix and Volume",
+      "resource_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/resources/mit18_06scf11_ses2-7sum/",
+      "pdf_url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/f6e46da0d783d8f9c0a25c407c76166a_MIT18_06SCF11_Ses2.7sum.pdf",
+      "sha256": "fbb1d787e1a1da3b38189c4628c4040c6fdf7f8dac5c9142f825001718bf09c8",
+      "pages": 5,
+      "summary_sections": [
+        "19"
+      ]
+    }
+  ],
+  "scope": "Unit I: 14 summaries; Unit II: first 7, through Cramer’s rule, inverse matrix and volume. Approximate first-half topic selection, not an official exam scope."
+}

@@ -2,7 +2,7 @@
 
 [单页 PDF](cheatsheet.pdf) · [可编辑 Typst 源稿](cheatsheet.typ) · [预览](preview.png) · [来源清单](sources.json) · [逐页覆盖台账](coverage.csv) · [核验记录](validation.md)
 
-与仓库中 10 页的计算机系统详细考场册分开，这份示例展示真正的**一页紧凑公式纸**：Letter 横向、四栏、四周 3.5 mm 边距、黑蓝红三色、20 个检索小节，中文理解后接英文答题短句。正文 8.7 pt、英文 8.6 pt，公式是真正的数学排版；没有底部页脚、封面、独立目录或额外背面。必要署名与许可保留在页顶，打印说明放在本文件。
+与仓库中 10 页的计算机系统详细考场册分开，这份示例展示真正的**一页紧凑公式纸**：Letter 横向、四栏、四周 3.5 mm 边距、黑蓝红三色、20 个检索小节，英文标题、定义、条件、步骤与答题提示优先，仅在相容性、选基、最小二乘几何和 Gram–Schmidt 处补 4 段中文短注。英文正文 9 pt、中文短注 7.6 pt，公式是真正的数学排版；没有底部页脚、封面、独立目录或额外背面。必要署名与许可保留在页顶，打印说明放在本文件。
 
 ## 真实课程与范围
 
@@ -35,7 +35,7 @@ python -m pip install typst==0.15.0
 python -c "import typst; typst.compile('examples/compact-math/cheatsheet.typ', output='examples/compact-math/cheatsheet.pdf')"
 ```
 
-本次使用 Windows 的 Microsoft YaHei 与 Cambria Math，字体嵌入 PDF、字体文件不随仓库分发。源稿也列出 Noto Sans CJK SC、DejaVu Sans、STIX Two Math / New Computer Modern Math 作为回退；需在宿主安装对应字体。更换字体或 Typst 版本后重新检查**恰好一页、上下标、中文、换栏与溢出**，不能把旧预览当成新编译结果。
+本次英文使用 Windows 的 Times New Roman，中文短注使用 Microsoft YaHei，数学使用 Cambria Math；字体嵌入 PDF、字体文件不随仓库分发。源稿也列出 Liberation Serif、Noto Sans CJK SC、STIX Two Math / New Computer Modern Math 作为回退；需在宿主安装对应字体。更换字体或 Typst 版本后重新检查**恰好一页、上下标、中文、换栏与溢出**，不能把旧预览当成新编译结果。
 
 台账校验：
 

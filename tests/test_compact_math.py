@@ -19,13 +19,23 @@ class CompactMathTests(unittest.TestCase):
 
     def test_twenty_topics_and_english_survive_export(self):
         text = PdfReader(ROOT / 'cheatsheet.pdf').pages[0].extract_text()
-        headings = ['方程的三种视角', '矩阵乘法', '消元', '逆矩阵与可逆判据', '子空间检查',
-                    'RREF', '解存在吗', '线性无关', '四个基本子空间', '矩阵空间', '图、网络与关联矩阵',
-                    '正交与最小二乘条件', '投影', '最小二乘与直线拟合', '正交归一基', 'Gram–Schmidt',
-                    '行列式性质与消元', '余子式', 'Cramer', '答题路径']
+        headings = ['Systems: three pictures', 'Products and transposes', 'Elimination, permutations, LU',
+                    'Invertibility', 'Subspaces: the closure test', 'RREF, rank and nullspace',
+                    'Consistency and solution count', 'Independence, basis, dimension',
+                    'Four fundamental subspaces', 'Matrix spaces and rank one',
+                    'Graphs and network matrices', 'Orthogonality and normal equations',
+                    'Orthogonal projections', 'Least squares and line fitting', 'Orthonormal columns',
+                    'Gram–Schmidt and QR', 'Determinants and elimination',
+                    'Cofactors and determinant formulas', 'Inverse, Cramer and volume',
+                    'Exam workflow and checks']
         for i, title in enumerate(headings, 1):
             self.assertRegex(text, rf'(?m)^{i:02} .*{re.escape(title)}')
-        self.assertEqual(len(re.findall(r'\bEN\b', text)), 20)
+        # Protect English-first density while retaining a few CJK clarifications.
+        latin = len(re.findall(r'[A-Za-z]', text))
+        chinese = len(re.findall(r'[\u4e00-\u9fff]', text))
+        self.assertGreater(chinese, 0)
+        self.assertGreater(latin, 10 * chinese)
+        self.assertLessEqual(text.count('中文提示'), 6)
         self.assertIn('CC BY-NC-SA 4.0', text)
         self.assertNotIn('\ufffd', text)
 

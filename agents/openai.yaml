@@ -1,6 +1,6 @@
 interface:
   display_name: "复习pdf"
-  short_description: "逐页中文精讲与中英考场资料；cheatsheet 未定页数先问，一页默认紧凑多栏三色排版"
-  default_prompt: "使用 $fuxi-pdf 准备复习 PDF 或 cheatsheet。Cheatsheet 未明确页数时先问一页、两页还是不限页；一页默认横向多栏、窄边距、黑蓝红紧凑公式纸。逐页精讲用中文，考场资料按要求先中文理解再英文表述，并核验来源与实际打印排版。"
+  short_description: "逐页中文精讲；公式纸英文优先、难点补中文，不限页详细册中英双语；未定页数先问"
+  default_prompt: "使用 $fuxi-pdf 准备复习 PDF 或 cheatsheet。Cheatsheet 未明确页数时先问一页、两页还是不限页；一页默认横向多栏、窄边距、黑蓝红紧凑公式纸。逐页精讲用中文；紧凑公式纸英文优先，仅繁琐处补中文；不限页详细册先中文理解再英文表述，并核验来源与实际打印排版。"
 policy:
   allow_implicit_invocation: true

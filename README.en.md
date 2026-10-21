@@ -10,13 +10,13 @@ A Codex skill that turns supplied slides, textbooks and exam information into so
 
 | Study walkthrough | Printable exam reference |
 | --- | --- |
-| Complete original slide above a Chinese explanation | Chinese explanation followed by usable English answers |
+| Complete original slide above a Chinese explanation | Compact: English-first; unlimited booklet: Chinese explanations then English answers |
 | Slide-by-slide, in lecture order | Organized by concepts, conditions and tradeoffs |
 | Mechanisms, examples, diagrams and common mistakes | Worked examples, short-answer questions, printed contents and term index |
 
 If a cheatsheet has no explicit page budget, the skill first asks: **one page, two pages, or no page limit?** An existing answer is reused. Words such as "detailed" or "minimal", and attached style references, do not set a page budget. One page means one printed face; a double-sided sheet has two pages.
 
-One-page requests default to a [compact formula-sheet layout](references/compact-cheatsheet.md): landscape standard paper, narrow margins, multiple columns, black explanations, blue formulas and English answer cues, and sparse red warnings. No separate cover, contents or index is added. Two-page requests stay within two pages; the detailed booklet style applies when no page limit is explicitly chosen. Language and layout requests take precedence. Screen-oriented extended pages remain separate from print layouts.
+One-page requests default to a [compact formula-sheet layout](references/compact-cheatsheet.md): landscape standard paper, narrow margins, multiple columns, black explanations, blue formulas and English answer cues, and sparse red warnings. No separate cover, contents or index is added. Two-page requests stay within two pages; the detailed booklet style applies when no page limit is explicitly chosen. Compact formula sheets, including two-page versions, default to English with Chinese only for selected difficult explanations. Only an explicitly unlimited detailed booklet defaults to full Chinese explanations followed by English answers. Explicit language and layout requests take precedence. Screen-oriented extended pages remain separate from print layouts.
 
 Walkthroughs use an engineering-handout style: teal headings, numbered sections, light-gray code or pseudocode blocks, field/state tables, and takeaway panels. Code, data flow and worked traces get structured formatting; conceptual teaching remains readable prose.
 
@@ -64,7 +64,7 @@ The vendor image on original page 9 is explicitly excluded from the OCW license,
 
 ## One-page compact mathematics example
 
-A separate example condenses a first-half topic selection from **MIT OCW 18.06SC Linear Algebra (Fall 2011, Gilbert Strang)** into one landscape Letter face: 21 lecture summaries, 85 source pages, and 20 compact sections covering systems, subspaces, orthogonality, least squares and determinants. It uses four columns and semantic black/blue/red, with Chinese explanations followed by English answer cues.
+A separate example condenses a first-half topic selection from **MIT OCW 18.06SC Linear Algebra (Fall 2011, Gilbert Strang)** into one landscape Letter face: 21 lecture summaries, 85 source pages, and 20 compact sections covering systems, subspaces, orthogonality, least squares and determinants. It uses four columns and semantic black/blue/red, with English-first headings, formulas, conditions and solution steps; brief Chinese notes clarify only selected difficult points.
 
 [One-page PDF](examples/compact-math/cheatsheet.pdf) · [Editable source, provenance and reproduction](examples/compact-math/README.md)
 

@@ -1,6 +1,6 @@
 ---
 name: fuxi-pdf
-description: 复习pdf：将 PDF/PPTX 课件、教材或提取文本制作成带来源页码的复习 PDF。支持原页在上、中文精讲在下的逐页版，以及先中文解释、再给英文答题表述的可打印 cheatsheet；也支持完整复习包、七步笔记与练习卷。适用于课件精读、零基础复习、考点和易错辨析；纯 PDF 合并拆分、一般问答不使用。
+description: 复习pdf：将 PDF/PPTX 课件、教材或提取文本制作成带来源页码的复习 PDF。支持原页在上、中文精讲在下的逐页版，以及英文优先的紧凑公式纸、先中文解释再给英文答题表述的不限页详细考场册；也支持完整复习包、七步笔记与练习卷。适用于课件精读、零基础复习、考点和易错辨析；纯 PDF 合并拆分、一般问答不使用。
 ---
 
 # 复习pdf
@@ -23,7 +23,7 @@ description: 复习pdf：将 PDF/PPTX 课件、教材或提取文本制作成带
 | --- | --- | --- |
 | 复习 PDF 和 cheatsheet、按之前方式准备学习与考场两册 | `study-pack` | 逐页中文精讲 PDF + 可打印考场重点 PDF；可编辑源文件与覆盖报告 |
 | 每页课件都解释、上面原课件下面讲解 | `slide-walkthrough` | 每张原课件对应一张竖版讲解页；完整中文精讲与来源映射 |
-| 打印带进考场、详细 cheatsheet、考场重点复习资料 | `exam-reference` | 中文机制、例子、易错点之后给英文核心表述与概念题短答；印刷目录和术语索引 |
+| 打印带进考场、详细 cheatsheet、考场重点复习资料 | `exam-reference` | 先确认页数；紧凑公式纸英文优先；不限页详细册中文机制之后给英文核心表述与短答 |
 | 完整复习、期末复习、多份讲义、未指定规模的复习资料、三册或课程图 | `full` | 完整复习、速查、易错点三套源文件与 PDF；课程图；覆盖报告 |
 | 总结这个课件、考点总结、简短速查、极简 cheatsheet | `summary` | `summary.tex` 和 `summary.pdf`；覆盖报告 |
 | 系统学习、七步笔记、章节笔记 | `notes` | `notes.tex` 和 `notes.pdf`；覆盖报告 |
@@ -31,13 +31,13 @@ description: 复习pdf：将 PDF/PPTX 课件、教材或提取文本制作成带
 
 请求“准备复习 PDF 和 cheatsheet”或明确需要学习与考场两册时，默认采用 `study-pack` 两册流程；只请求某一册则只做该册。使用 `study-pack`、`slide-walkthrough` 或 `exam-reference` 前，读 [study-and-exam-pack.md](references/study-and-exam-pack.md)。Cheatsheet 页数须按上面的确认规则处理，不把课程实例的页数或考试规则写成通用要求。
 
-页数限制本身不改变语言组织：请求中文理解与英文答题的考场资料，即使限两页也采用 `exam-reference`，在限页内安排内容。
+语言按产物与密度决定：**紧凑公式型 cheatsheet 默认英文优先**，标题、定义、条件、步骤与答题句都用英文，公式保留标准符号；仅对个别繁琐机制或易混区别补简短中文，不逐点附中文译文，也不强制每点两种语言。**明确不限页的详细考场册才默认完整中英组织**：先中文解释，再给英文核心表述和短答。两页紧凑公式纸沿用英文优先；用户明确指定语言时优先遵从，模式名称本身不强制双语。
 
 用户明确要求的单个产物或章节范围优先，不强制扩展为完整套装。`notes` 可按明确请求适配考研、考公、科研、项目或竞赛；结构见 [note-modes.md](references/note-modes.md)，不默认扩展普通课程复习的范围。
 
-默认参数：`language=auto`、`depth=comprehensive`、`format=latex`、单栏可读排版。支持 `language=auto|zh|en|bilingual`、`depth=concise|comprehensive|deep`、`format=latex|typst|markdown`。`auto` 为中文解释并保留英文术语、定义与考试原文；明确要求跟随课件时才跟随原语言。公式符号、定理名与标准缩写保留。只在请求影响实质内容且无法推断时澄清。
+默认参数：`language=auto`、`depth=comprehensive`、`format=latex`、单栏可读排版。支持 `language=auto|zh|en|bilingual`、`depth=concise|comprehensive|deep`、`format=latex|typst|markdown`。`auto` 按成品分流：精讲默认中文，紧凑公式纸默认英文并酌情补中文，不限页详细考场册默认先中文后英文；明确要求跟随课件时才跟随原语言。公式符号、定理名与标准缩写保留。只在请求影响实质内容且无法推断时澄清。
 
-语言按成品分别决定：逐页精讲默认中文教学，保留必要英文术语而不附整段英文复述；考场重点册默认每个考点先中文解释，再给可用于考试的英文表述。明确的语言要求始终优先，不把一种成品的双语要求套到另一种。
+语言按成品分别决定：逐页精讲默认中文教学，保留必要英文术语而不附整段英文复述；紧凑公式纸英文优先、仅难点补中文；不限页详细考场册才默认每个考点先中文解释，再给可用于考试的英文表述。明确的语言要求始终优先，不把一种成品的双语要求套到另一种。
 
 逐页精讲与 cheatsheet 默认采用理工科讲义版式：青色标题、编号小节、浅灰代码/伪代码块、字段或状态表格、浅青“记住”提示框。代码、数据和流程优先块状表达，概念正文与英文答案保留正常正文字体；cheatsheet 坚持标准打印纸张，具体排版见 [walkthrough-style.md](references/walkthrough-style.md)。
 

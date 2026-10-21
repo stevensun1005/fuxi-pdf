@@ -7,7 +7,7 @@
 | 文件 | 内容与纸张 |
 | --- | --- |
 | [demo-slides.pdf](input/demo-slides.pdf) | 3 张完整原页，保留原图、署名和原页码 |
-| [slide-walkthrough.pdf](output/slide-walkthrough.pdf) | 3 页竖版 A4：原课件在上，中文精讲在下，带逐页书签 |
+| [slide-walkthrough.pdf](output/slide-walkthrough.pdf) | 3 页 A4 宽度竖版长页：原课件在上，下方用编号、代码框、表格与提示框精讲，带逐页书签 |
 | [exam-reference.pdf](output/exam-reference.pdf) | 3 页 Letter：中文机制与例子，英文核心表述及每页两道短答；末页有比较表 |
 
 原课件来自 [官方资源页](https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/resources/mit6_033s18lec14/)。演示讲解、补充例子和英文短答由本项目编写，不是官方答案或真题。预览使用成品第 2 页（RAID 4）。
@@ -22,7 +22,9 @@ RAID 4 的自编 XOR 例子独立核算：`10 XOR 11 = 01`；丢失第二块后�
 python examples/build_demo.py --font /path/to/chinese-truetype-font.ttf
 ```
 
-脚本默认使用仓库中的真实课件节选，重建两册、README 预览与覆盖台账，不访问网络。Windows 安装 Microsoft YaHei 时可省略 `--font`。字体需为 ReportLab 支持的 TrueType `.ttf` 或 `.ttc`，不随仓库提供。
+脚本默认使用仓库中的真实课件节选，重建两册、README 预览与覆盖台账，不访问网络。Windows 安装 Microsoft YaHei 时可省略 `--font`。字体需为 ReportLab 支持的 TrueType `.ttf` 或 `.ttc`，不随仓库提供。代码优先使用系统已有的 Consolas 或 DejaVu Sans Mono，中文注释使用中文字体回退。
+
+精讲用约 11.5 pt 正文、灰底等宽代码块、字段/状态表格与浅青提示框，按内容增加页高，保持一张原课件与完整讲解同页，适合屏幕阅读。它不是标准 A4 打印页；考场册仍使用固定 Letter 纸张。详细风格见 [逐页排版规范](../references/walkthrough-style.md)。
 
 如需从官方 PDF 重新提取三张原页，下载 [完整课件](https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/8eb16d3628bbd77ee7e8471b9871ec09_MIT6_033S18lec14.pdf)，再指定：
 

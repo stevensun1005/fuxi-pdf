@@ -16,6 +16,8 @@ A Codex skill that turns supplied slides, textbooks and exam information into so
 
 A cheatsheet is not automatically one page. Explicit exam limits take precedence. Screen-oriented extended pages are kept separate from standard-paper print layouts.
 
+Walkthroughs use an engineering-handout style: teal headings, numbered sections, light-gray code or pseudocode blocks, field/state tables, and takeaway panels. Code, data flow and worked traces get structured formatting; conceptual teaching remains readable prose.
+
 ## Install
 
 The skill lives at the repository root:
@@ -55,6 +57,8 @@ The skill preserves editable sources, source-page references and a coverage ledg
 The demo uses three real slides (original pages 11-13) from Katrina LaCurts' MIT OpenCourseWare 6.033, Spring 2018, Lecture 14: RAID 1, RAID 4 and RAID 5. It includes the [source excerpt](examples/input/demo-slides.pdf), a three-page [Chinese walkthrough](examples/output/slide-walkthrough.pdf), and a three-page [printable bilingual reference](examples/output/exam-reference.pdf). Preview images show page 2 (RAID 4). These are independently written educational adaptations of a selected passage, not a full-lecture guide or official answers. See the [official resource](https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/resources/mit6_033s18lec14/) and [reproduction instructions](examples/README.md).
 
 ## Validate
+
+The walkthrough uses A4-width extended pages to keep each slide with its complete explanation. The exam reference uses standard Letter pages for printing.
 
 ```sh
 python -m pip install -r requirements-dev.txt

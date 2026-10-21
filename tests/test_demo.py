@@ -12,7 +12,7 @@ class DemoTests(unittest.TestCase):
     def test_page_counts_and_paper(self):
         for relative, count, dimensions in [
             ('input/demo-slides.pdf', 3, (1024, 768)),
-            ('output/slide-walkthrough.pdf', 3, (595.28, 841.89)),
+            ('output/slide-walkthrough.pdf', 3, (595.28, None)),
             ('output/exam-reference.pdf', 3, (612, 792)),
         ]:
             with self.subTest(file=relative):
@@ -20,7 +20,26 @@ class DemoTests(unittest.TestCase):
                 self.assertEqual(len(reader.pages), count)
                 for page in reader.pages:
                     self.assertAlmostEqual(float(page.mediabox.width), dimensions[0], places=1)
-                    self.assertAlmostEqual(float(page.mediabox.height), dimensions[1], places=1)
+                    if dimensions[1] is None:
+                        self.assertGreaterEqual(float(page.mediabox.height),841.88)
+                    else:
+                        self.assertAlmostEqual(float(page.mediabox.height), dimensions[1], places=1)
+
+    def test_walkthrough_blocks_preserve_the_complete_teaching_text(self):
+        items=json.loads((ROOT/'examples/demo-content.json').read_text(encoding='utf-8'))
+        reader=PdfReader(ROOT/'examples/output/slide-walkthrough.pdf')
+        compact=lambda text: ''.join(text.replace('`','').split())
+        for item,page in zip(items,reader.pages):
+            actual=compact(page.extract_text())
+            expected=[item['title'],item['takeaway']]
+            expected.extend(body for heading,body in item['walkthrough'])
+            for block in item['walkthrough_insertions']:
+                if block['type']=='code':expected.append(block['text'])
+                else:expected.extend(value for row in [block['headers'],*block['rows']] for value in row)
+            for text in expected:
+                self.assertIn(compact(text),actual)
+            fonts=[str(font.get_object().get('/BaseFont','')) for font in page['/Resources']['/Font'].values()]
+            self.assertTrue(any(any(name in font for name in ['Consolas','DejaVuSansMono','Courier']) for font in fonts))
 
     def test_chinese_and_english_are_extractable(self):
         walk = PdfReader(ROOT / 'examples/output/slide-walkthrough.pdf')

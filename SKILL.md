@@ -9,7 +9,15 @@ description: 复习pdf：将 PDF/PPTX 课件、教材或提取文本制作成带
 
 ## 默认选择与模式
 
-根据用户请求直接推断，无需为已有合理默认值打断任务：
+### Cheatsheet 先确认页数
+
+请求包含 cheatsheet、公式纸或考场速查纸时，先检查当前任务是否已有明确页数。若没有，**必须主动问：“这份 cheatsheet 要一页、两页，还是不限页数？”** “详细一点”“重点”“打印”“极简”或附了样式参考，都不等于明确页数；不能自行默认一页或不限页。已有明确答案则沿用，不重复问。等待回答时可读取资料与建立来源台账，但不自行确定最终篇幅；等待时间不构成回答。
+
+一页指一个 PDF 页面/打印面；明确“一张纸双面”则是两页。有实质歧义时才澄清。页数确认仅针对 cheatsheet，不阻塞同时请求的学习册准备，也不把普通复习 PDF 一律变成限页速查。
+
+**明确要一页时，默认使用 [紧凑型公式纸版式](references/compact-cheatsheet.md)**：横向标准纸、多栏、窄边距、黑蓝红语义配色、公式与短句密排。它优先于下面的单栏、宽松代码框、详细问答和目录索引默认值。两页按两页预算设计；明确不限页才使用详细册的自然分页。用户指定的语言、纸张与版式始终优先，不据此推断考试允许多少纸张。
+
+页数确认后，根据用户请求选择模式，其余已有合理默认值无需打断任务：
 
 | 请求 | 模式 | 默认交付 |
 | --- | --- | --- |
@@ -21,7 +29,7 @@ description: 复习pdf：将 PDF/PPTX 课件、教材或提取文本制作成带
 | 系统学习、七步笔记、章节笔记 | `notes` | `notes.tex` 和 `notes.pdf`；覆盖报告 |
 | 真题整理、冲刺练习 | `practice` | `practice.tex/pdf` 与独立 `practice-solutions.tex/pdf`；覆盖报告 |
 
-请求“准备复习 PDF 和 cheatsheet”或明确需要学习与考场两册时，默认采用 `study-pack` 两册流程；只请求某一册则只做该册。使用 `study-pack`、`slide-walkthrough` 或 `exam-reference` 前，读 [study-and-exam-pack.md](references/study-and-exam-pack.md)。Cheatsheet 不自动等于一页，按明确页限和可读性决定篇幅；不把课程实例的页数或考试规则写成通用要求。
+请求“准备复习 PDF 和 cheatsheet”或明确需要学习与考场两册时，默认采用 `study-pack` 两册流程；只请求某一册则只做该册。使用 `study-pack`、`slide-walkthrough` 或 `exam-reference` 前，读 [study-and-exam-pack.md](references/study-and-exam-pack.md)。Cheatsheet 页数须按上面的确认规则处理，不把课程实例的页数或考试规则写成通用要求。
 
 页数限制本身不改变语言组织：请求中文理解与英文答题的考场资料，即使限两页也采用 `exam-reference`，在限页内安排内容。
 

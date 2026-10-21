@@ -14,7 +14,9 @@ A Codex skill that turns supplied slides, textbooks and exam information into so
 | Slide-by-slide, in lecture order | Organized by concepts, conditions and tradeoffs |
 | Mechanisms, examples, diagrams and common mistakes | Worked examples, short-answer questions, printed contents and term index |
 
-A cheatsheet is not automatically one page. Explicit exam limits take precedence. Screen-oriented extended pages are kept separate from standard-paper print layouts.
+If a cheatsheet has no explicit page budget, the skill first asks: **one page, two pages, or no page limit?** An existing answer is reused. Words such as "detailed" or "minimal", and attached style references, do not set a page budget. One page means one printed face; a double-sided sheet has two pages.
+
+One-page requests default to a [compact formula-sheet layout](references/compact-cheatsheet.md): landscape standard paper, narrow margins, multiple columns, black explanations, blue formulas and English answer cues, and sparse red warnings. No separate cover, contents or index is added. Two-page requests stay within two pages; the detailed booklet style applies when no page limit is explicitly chosen. Language and layout requests take precedence. Screen-oriented extended pages remain separate from print layouts.
 
 Walkthroughs use an engineering-handout style: teal headings, numbered sections, light-gray code or pseudocode blocks, field/state tables, and takeaway panels. Code, data flow and worked traces get structured formatting; conceptual teaching remains readable prose.
 
@@ -53,6 +55,8 @@ For a constrained reference, specify the page budget, paper, sides and answer la
 The skill preserves editable sources, source-page references and a coverage ledger. Priorities distinguish explicit instructor statements, observed assessment evidence and inferred study emphasis. Authored practice answers are not presented as official solutions or predictions.
 
 ## Inspect the examples
+
+This is an unlimited-length booklet example, not the default density for a one-page cheatsheet.
 
 The demo covers all 15 pages of Katrina LaCurts' MIT OpenCourseWare 6.033, Spring 2018, Lecture 14 and its official companion outline: fault models, fault-tolerance design, availability, MTBF, RAID 1/4/5 and reliability tradeoffs. It includes a [15-page public source adaptation](examples/input/demo-slides.pdf), a [15-page Chinese walkthrough](examples/output/slide-walkthrough.pdf), and a [10-page Letter cheatsheet](examples/output/exam-reference.pdf) with seven concept chapters, fourteen original English short-answer examples, a printed contents page, an English index and a source map.
 

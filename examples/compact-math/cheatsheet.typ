@@ -1,9 +1,9 @@
 // Educational adaptation: CC BY-NC-SA 4.0. Sources and changes: README.md.
 // Build: typst compile cheatsheet.typ cheatsheet.pdf
 #set document(title: "Linear Algebra | 单页紧凑速查", author: "fuxi-pdf")
-#set page(paper: "us-letter", flipped: true, margin: (x: 7mm, y: 6mm))
-#set text(font: ("Microsoft YaHei", "Noto Sans CJK SC", "DejaVu Sans"), size: 9pt, lang: "zh")
-#set par(leading: 2.7pt, spacing: 2.5pt, justify: false)
+#set page(paper: "us-letter", flipped: true, margin: 3.5mm)
+#set text(font: ("Microsoft YaHei", "Noto Sans CJK SC", "DejaVu Sans"), size: 8.7pt, lang: "zh")
+#set par(leading: 2pt, spacing: 2.5pt, justify: false)
 #set block(spacing: 3pt)
 #let blue = rgb("1648a8")
 #let red = rgb("b12626")
@@ -19,7 +19,7 @@
   #body
 ]
 
-#text(weight: "bold", size: 11pt)[线性代数 · 紧凑单页速查] #h(1fr) #text(fill: blue, size: 8pt)[Linear Algebra / first-half topic selection]
+#text(weight: "bold", size: 11pt)[线性代数 · 紧凑单页速查] #h(1fr) #text(fill: blue, size: 6.7pt)[MIT OCW · Gilbert Strang · 2011 · 改编 fuxi-pdf · #link("https://creativecommons.org/licenses/by-nc-sa/4.0/")[CC BY-NC-SA 4.0]]
 #parbreak()
 #text(size: 7pt)[范围：MIT 18.06SC (2011)，几何、消元、子空间、正交与最小二乘、行列式。约半学期主题；不含特征值及后续内容。]
 #parbreak()
@@ -40,6 +40,7 @@ grid.vline(x: 3, stroke: 0.25pt + rgb("bbbbbb")),
 #sec("02", "矩阵乘法 / 转置", "[S04 p1–3; S05 p1]", [
 $A_(m times n) B_(n times k)$ 才可乘；结果 $m times k$。右乘逐列组合，左乘逐行组合。
 #eq($(A B)_(i j)=sum_(ell=1)^n a_(i ell)b_(ell j)$)
+外积视角：$A B=sum_(ell=1)^n A_(:,ell) B_(ell,:)$，每项是“列×行”的矩阵。
 #eq($(A B)^T=B^T A^T, quad (A B)^(-1)=B^(-1) A^(-1)$)
 逆乘积式要求两者均为可逆方阵。
 #en[Order reverses under transpose or inversion.]
@@ -49,21 +50,27 @@ $A_(m times n) B_(n times k)$ 才可乘；结果 $m times k$。右乘逐列组�
 $R_i <- R_i - ell_(i j) R_j$，同时更新右端 $b$。主元为零先找可交换行；矩形阵可跳过无主元列。
 #eq($P A=L U, quad L c=P b, quad U x=c$)
 $L$ 单位下三角，$U$ 上三角；无换行时 $P=I$。$L$ 记录消元倍数。置换阵 $P^(-1)=P^T$。
+方阵分解成本 $O(n^3)$；每个新 $b$ 的两次三角求解为 $O(n^2)$。[S05 p2]
+原例的分解，可直接相乘自检：
+#eq($mat(2,1;8,7)=mat(1,0;4,1) mat(2,1;0,3)$)
 #en[Factor once, then use forward and back substitution for each right-hand side.]
 #warn[换行后不能忘记对 $b$ 同步置换。]
 ])
-#sec("04", "逆矩阵与可逆判据", "[S04 p2–3; S09 p2–3; S19 p2]", [
+#sec("04", "逆矩阵与可逆判据", "[S04 p2–3; S09 p2–3; S19 p2; S21 p1]", [
 仅对 $n times n$ 方阵，下列等价：
 #eq($A^(-1) "exists" <==> r=n <==> N(A)={0}$)
 #eq($<==> det A != 0 <==> R=I$)
 也等价于：对每个 $b$，$A x=b$ 恰有一解；列向量构成 $RR^n$ 的基。
 #eq($[A quad bar.v quad I] -> [I quad bar.v quad A^(-1)]$)
+二阶速算（$a d-b c != 0$）：
+#eq($mat(a,b;c,d)^(-1)=1/(a d-b c) mat(d,-b;-c,a)$)
 #en[An invertible square matrix has a pivot in every row and every column.]
 ])
 #sec("05", "子空间检查", "[S06 p1–2; S07 p1–2]", [
 非空集合 $V$ 是子空间：含零向量，且对加法与任意实数倍封闭；可合写为
 #eq($u,v in V => alpha u+beta v in V$)
 齐次方程解集是子空间；$A x=b != 0$ 的非空解集是平移后的仿射集，不是子空间。
+反例：两条不同的过原点直线的并集通常不对加法封闭；两个子空间的交集总是子空间。[S12 p1]
 #en[It contains zero and is closed under all linear combinations.]
 #warn[过原点只是必要条件，不足以证明封闭。]
 ])
@@ -74,6 +81,7 @@ $L$ 单位下三角，$U$ 上三角；无换行时 $P=I$。$L$ 记录消元倍�
 #eq($dim N(A)=n-r$)
 将主元列排在前面时，可写
 #eq($R=mat(I,F;0,0), quad Z=mat(-F;I), quad R Z=0$)
+自编例：$R=mat(1,2,0;0,0,1)$，自由变量 $x_2=t$，故 $x=t(-2,1,0)^T$。
 #en[The special solutions form a basis for the nullspace.]
 #warn[若换过列，解向量要恢复原变量顺序。]
 ])
@@ -83,6 +91,10 @@ $L$ 单位下三角，$U$ 上三角；无换行时 $P=I$。$L$ 记录消元倍�
 有解时：$r=n$ 唯一；$r<n$ 无穷多。
 #eq($x=x_p+z, quad z in N(A)$)
 $x_p$ 可令自由变量为零求出。$r=m$ 表示对所有 $b$ 均有解；不保证唯一。
+#set table(inset: 1.4pt, stroke: 0.25pt)
+#table(columns: (1fr, 1fr), [秩情形], [给定 $b$ 的解数],
+[$r=m=n$], [恰好 1], [$r=n<m$], [0 或 1],
+[$r=m<n$], [无穷多], [$r<m, r<n$], [0 或无穷多])
 #en[Consistency depends on $b$; uniqueness depends on $N(A)$.]
 ])
 #sec("08", "线性无关、基、维数", "[S10 p1–3]", [
@@ -99,6 +111,7 @@ $C(A)$ 的基：取 *原矩阵* 中与主元位置对应的列。行空间的基
 [$C(A^T)$], [$RR^n$], [$r$],
 [$N(A)$], [$RR^n$], [$n-r$])
 #eq($C(A)^perp=N(A^T), quad C(A^T)^perp=N(A)$)
+相容的另一判据：对所有 $y in N(A^T)$，$y^T b=0$；左零空间给出右端必须满足的约束。[S09 p1]
 #en[Each nullspace is the orthogonal complement of the corresponding row space.]
 ])
 #sec("10", "矩阵空间 / 秩一", "[S11 p3; S12 p1–3]", [
@@ -115,6 +128,7 @@ $B$ 每行一条边、每列一个节点；边 $i -> j$ 的行在 $i$ 为 $-1$�
 #eq($"rank"(B)=v-1, quad N(B)="span"{bold(1)}$)
 #eq($dim N(B^T)=e-v+1$)
 末式数独立回路；树有 $v-1$ 条边、无回路。$B^T y=0$ 是无外源时的节点流量守恒。
+有电源注入 $f$、边电导矩阵 $D$ 时：势差 $d=B x$，电流 $y=D d$，联立得 $B^T D B x=f$。[S13 p4]
 #en[Cycle flows lie in the left nullspace.]
 ])
 #sec("12", "正交与最小二乘条件", "[S15 p1–2; S17 p3]", [
@@ -132,6 +146,7 @@ $B$ 每行一条边、每列一个节点；边 $i -> j$ 的行在 $i$ 为 $-1$�
 #eq($P=A(A^T A)^(-1) A^T, quad p=P b$)
 #eq($P^T=P, quad P^2=P, quad e=(I-P)b$)
 $p in C(A)$，$e perp C(A)$；若 $b in C(A)$，则 $P b=b$。
+自编例：$a=(1,2)^T,b=(3,0)^T$，$p=(3/5,6/5)^T$；查 $a^T(b-p)=0$。
 #en[The residual is orthogonal to the target subspace.]
 #warn[秩不足时，不能直接使用上述逆矩阵式。]
 ])
@@ -141,12 +156,16 @@ $p in C(A)$，$e perp C(A)$；若 $b in C(A)$，则 $P b=b$。
 列满秩时 $hat(x)=(A^T A)^(-1) A^T b$。拟合 $b_i approx C+D t_i$：设计阵第 $i$ 行是 $[1, t_i]$。
 原例 $(t,b)=(1,1),(2,2),(3,2)$：
 #eq($hat(C)=2/3, quad hat(D)=1/2, quad norm(e)^2=1/6$)
+从法方程推得：
+#eq($hat(D)=(sum_i (t_i-mu_t)(b_i-mu_b))/(sum_i (t_i-mu_t)^2), quad hat(C)=mu_b-hat(D)mu_t$)
+$mu_t,mu_b$ 为样本均值；至少两个不同 $t_i$ 才能确定斜率。
 #en[This minimizes squared vertical residuals in the data plot.]
 #warn[投影几何发生在观测向量空间 $RR^m$。]
 ])
 #sec("15", "正交归一基 / Q", "[S18 p1–3]", [
 #eq($q_i^T q_j=cases(1 & i=j, 0 & i != j), quad Q^T Q=I$)
 矩形 $Q$ 列正交归一时，$P=Q Q^T$；投影坐标 $hat(x)=Q^T b$。只有 $Q$ 为方阵时，才有 $Q^(-1)=Q^T$、$Q Q^T=I$。
+正交分解 $b=p+e$：$p^T e=0$，故 $norm(b)^2=norm(p)^2+norm(e)^2$。[S15 p1]
 #en[Orthonormal columns simplify projection; a rectangular $Q$ need not be invertible.]
 ])
 ],
@@ -156,6 +175,7 @@ $p in C(A)$，$e perp C(A)$；若 $b in C(A)$，则 $P b=b$。
 #eq($u_j=a_j-sum_(i<j)(q_i^T a_j)q_i, quad q_j=u_j/norm(u_j)$)
 #eq($A=Q R, quad R=Q^T A$)
 $R$ 上三角，$r_(i j)=q_i^T a_j$（$i<j$），$r_(j j)=norm(u_j)$。满列秩最小二乘：解 $R hat(x)=Q^T b$。
+原例 $a_1=(1,1,1)^T,a_2=(1,0,2)^T$：$q_1=(1,1,1)^T/sqrt(3)$，$q_2=(0,-1,1)^T/sqrt(2)$。[S18 p3]
 #en[Subtract projections, normalize, and preserve the span.]
 #warn[$u_j=0$ 表示依赖，不能除以零。]
 ])
@@ -163,6 +183,7 @@ $R$ 上三角，$r_(i j)=q_i^T a_j$（$i<j$），$r_(j j)=norm(u_j)$。满列秩
 仅对方阵。换两行变号；某行乘 $c$，行列式乘 $c$；某行加另一行倍数，行列式不变。
 #eq($det I=1, quad det(A B)=det A det B$)
 #eq($det A^T=det A, quad det(c A)=c^n det A$)
+行（列）相关则 $det A=0$；可逆时 $det A^(-1)=1/(det A)$。
 若 $P A=L U$，$L$ 对角为 1、共换行 $s$ 次：
 #eq($det A=(-1)^s product_(i=1)^n u_(i i)$)
 #en[Track row swaps, then multiply the diagonal entries of the triangular matrix.]
@@ -172,6 +193,8 @@ $R$ 上三角，$r_(i j)=q_i^T a_j$（$i<j$），$r_(j j)=norm(u_j)$。满列秩
 删第 $i$ 行、第 $j$ 列得 $M_(i j)$；代数余子式
 #eq($C_(i j)=(-1)^(i+j) det M_(i j)$)
 #eq($det A=sum_(j=1)^n a_(i j) C_(i j)$)
+排列通式（$S_n$ 为全部 $n!$ 个排列）：
+#eq($det A=sum_(pi in S_n) "sgn"(pi) product_(i=1)^n a_(i,pi(i))$)
 选零最多的行或列展开；符号棋盘从左上角 $+$ 开始。三对角全 1 原例：$d_n=d_(n-1)-d_(n-2)$，$d_1=1,d_2=0$。
 #en[Expand along any one row or column, using the matching cofactors.]
 #warn[三阶对角线口诀不能推广到四阶。]
@@ -181,6 +204,7 @@ $C$ 为代数余子式矩阵；若 $det A != 0$：
 #eq($A^(-1)=C^T/(det A), quad x_j=(det A_j)/(det A)$)
 $A_j$ 是将 $A$ 的第 $j$ *列* 换成 $b$。
 列向量构成的平行多面体体积为 $abs(det A)$；三角形面积为两边组成行列式绝对值的一半。
+自编例：边向量 $(2,0)^T,(1,3)^T$ 的平行四边形面积 $abs(2 times 3-0 times 1)=6$，三角形为 3。
 #en[The absolute determinant gives volume; its sign records orientation.]
 #warn[逆矩阵要转置余子式阵；体积不能为负。]
 ])
@@ -191,7 +215,3 @@ $A_j$ 是将 $A$ 的第 $j$ *列* 换成 $b$。
 #warn[相容≠唯一；列满秩≠列空间填满 $RR^m$。]
 ])
 ])
-#v(1pt)
-#line(length: 100%, stroke: 0.5pt)
-#text(size: 6.2pt)[来源 S01–S21：MIT OCW 18.06SC, Gilbert Strang (2011), lecture summaries；#link("https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/resource-index/")[官方索引]。编号与源页见随附台账。由 fuxi-pdf 压缩、翻译及校正；#link("https://creativecommons.org/licenses/by-nc-sa/4.0/")[CC BY-NC-SA 4.0]。]
-#text(size: 6.2pt)[自制学习示例，非官方答案/获准带入考试的声明；省略完整证明与多数原例。Letter 横向，100% 实际大小，每面 1 页，勿再次多页缩印。]

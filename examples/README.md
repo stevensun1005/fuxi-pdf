@@ -1,6 +1,16 @@
-# MIT 6.033 第14讲 · 完整双册示例
+# 成品演示：先选择页数与语言
 
-另有独立的 [单页紧凑数学示例](compact-math/README.md)：线性代数近半学期主题，四栏三色；下文保留计算机系统全讲精讲与不限页详细考场册示例。
+## 最新预览：英文为主的单页数学 Cheatsheet
+
+[打开 PDF](compact-math/cheatsheet.pdf) · [来源、源稿与复现](compact-math/README.md)
+
+![英文为主的单页数学 Cheatsheet，四栏三色、仅难点补中文](compact-math/preview-english.png)
+
+这是已明确选择一页、英文为主的线性代数示例；制作其他资料时，先确认未明确的页数和语言偏好，不默认所有人都选英文或双语。
+
+## 另一份示例：MIT 6.033 第14讲 · 完整双册
+
+下面保留的是逐页中文精讲与不限页中英双语详细册，和上面的单页公式纸是不同成品。
 
 来源：**Katrina LaCurts，MIT OpenCourseWare，6.033 Computer System Engineering，Spring 2018，Lecture 14: Fault Tolerance: Reliability via Replication**。
 

@@ -2,7 +2,7 @@
 
 # fuxi-pdf · 复习pdf
 
-**Understand in Chinese. Answer in English.**
+**Choose your language balance. Understand the course. Prepare your reference.**
 
 [中文说明](README.md) · [Skill instructions](SKILL.md) · [Actual PDF examples](examples/README.md)
 
@@ -10,13 +10,13 @@ A Codex skill that turns supplied slides, textbooks and exam information into so
 
 | Study walkthrough | Printable exam reference |
 | --- | --- |
-| Complete original slide above a Chinese explanation | Compact: English-first; unlimited booklet: Chinese explanations then English answers |
+| Complete original slide above an explanation in the selected language | Choose English-first, Chinese-heavy or full bilingual |
 | Slide-by-slide, in lecture order | Organized by concepts, conditions and tradeoffs |
 | Mechanisms, examples, diagrams and common mistakes | Worked examples, short-answer questions, printed contents and term index |
 
 If a cheatsheet has no explicit page budget, the skill first asks: **one page, two pages, or no page limit?** An existing answer is reused. Words such as "detailed" or "minimal", and attached style references, do not set a page budget. One page means one printed face; a double-sided sheet has two pages.
 
-One-page requests default to a [compact formula-sheet layout](references/compact-cheatsheet.md): landscape standard paper, narrow margins, multiple columns, black explanations, blue formulas and English answer cues, and sparse red warnings. No separate cover, contents or index is added. Two-page requests stay within two pages; the detailed booklet style applies when no page limit is explicitly chosen. Compact formula sheets, including two-page versions, default to English with Chinese only for selected difficult explanations. Only an explicitly unlimited detailed booklet defaults to full Chinese explanations followed by English answers. Explicit language and layout requests take precedence. Screen-oriented extended pages remain separate from print layouts.
+One-page requests default to a [compact formula-sheet layout](references/compact-cheatsheet.md): landscape standard paper, narrow margins, multiple columns, black explanations, blue formulas and English answer cues, and sparse red warnings. No separate cover, contents or index is added. Two-page requests stay within two pages; the detailed booklet style applies when no page limit is explicitly chosen. If language is unspecified, the skill asks whether you prefer English-first, more Chinese explanation, or full bilingual. Page count does not determine language. Missing page and language choices are asked together; existing explicit choices are reused. The examples show specific selected language profiles, not a preference imposed on every user. Explicit language and layout requests take precedence. Screen-oriented extended pages remain separate from print layouts.
 
 Walkthroughs use an engineering-handout style: teal headings, numbered sections, light-gray code or pseudocode blocks, field/state tables, and takeaway panels. Code, data flow and worked traces get structured formatting; conceptual teaching remains readable prose.
 
@@ -54,23 +54,23 @@ For a constrained reference, specify the page budget, paper, sides and answer la
 
 The skill preserves editable sources, source-page references and a coverage ledger. Priorities distinguish explicit instructor statements, observed assessment evidence and inferred study emphasis. Authored practice answers are not presented as official solutions or predictions.
 
-## Inspect the examples
-
-This is an unlimited-length booklet example, not the default density for a one-page cheatsheet.
-
-The demo covers all 15 pages of Katrina LaCurts' MIT OpenCourseWare 6.033, Spring 2018, Lecture 14 and its official companion outline: fault models, fault-tolerance design, availability, MTBF, RAID 1/4/5 and reliability tradeoffs. It includes a [15-page public source adaptation](examples/input/demo-slides.pdf), a [15-page Chinese walkthrough](examples/output/slide-walkthrough.pdf), and a [10-page Letter cheatsheet](examples/output/exam-reference.pdf) with seven concept chapters, fourteen original English short-answer examples, a printed contents page, an English index and a source map.
-
-The vendor image on original page 9 is explicitly excluded from the OCW license, so that page is replaced with a clearly labeled text-only adaptation; the other fourteen pages retain their original visuals. The complete unmodified source is available from the [official resource](https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/resources/mit6_033s18lec14/). These are independently written learning materials, not official answers. Previews show walkthrough page 12 and cheatsheet page 3. See [reproduction instructions](examples/README.md).
-
-## One-page compact mathematics example
+## Latest cheatsheet preview: one page, English-first
 
 A separate example condenses a first-half topic selection from **MIT OCW 18.06SC Linear Algebra (Fall 2011, Gilbert Strang)** into one landscape Letter face: 21 lecture summaries, 85 source pages, and 20 compact sections covering systems, subspaces, orthogonality, least squares and determinants. It uses four columns and semantic black/blue/red, with English-first headings, formulas, conditions and solution steps; brief Chinese notes clarify only selected difficult points.
 
 [One-page PDF](examples/compact-math/cheatsheet.pdf) · [Editable source, provenance and reproduction](examples/compact-math/README.md)
 
-![Compact mathematics preview](examples/compact-math/preview.png)
+![Compact mathematics preview](examples/compact-math/preview-english.png)
 
-This approximates a half-semester topic range, not an official midterm scope. Proofs and most worked examples are omitted explicitly. It demonstrates a different density from the ten-page detailed computer-systems booklet.
+This approximates a half-semester topic range, not an official midterm scope. Proofs and most worked examples are omitted explicitly. The ten-page bilingual computer-systems booklet below demonstrates another language balance and density; it is a separate artifact.
+
+## Separate example: detailed bilingual booklet and walkthrough
+
+This is a separate, retained bilingual booklet, not an outdated preview of the English-first one-page sheet above.
+
+The demo covers all 15 pages of Katrina LaCurts' MIT OpenCourseWare 6.033, Spring 2018, Lecture 14 and its official companion outline: fault models, fault-tolerance design, availability, MTBF, RAID 1/4/5 and reliability tradeoffs. It includes a [15-page public source adaptation](examples/input/demo-slides.pdf), a [15-page Chinese walkthrough](examples/output/slide-walkthrough.pdf), and a [10-page Letter cheatsheet](examples/output/exam-reference.pdf) with seven concept chapters, fourteen original English short-answer examples, a printed contents page, an English index and a source map.
+
+The vendor image on original page 9 is explicitly excluded from the OCW license, so that page is replaced with a clearly labeled text-only adaptation; the other fourteen pages retain their original visuals. The complete unmodified source is available from the [official resource](https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/resources/mit6_033s18lec14/). These are independently written learning materials, not official answers. Previews show walkthrough page 12 and cheatsheet page 3. See [reproduction instructions](examples/README.md).
 
 ## Validate
 

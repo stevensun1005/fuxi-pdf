@@ -52,7 +52,7 @@ The skill preserves editable sources, source-page references and a coverage ledg
 
 ## Inspect the examples
 
-The repository includes [original demonstration slides](examples/input/demo-slides.pdf), a [Chinese walkthrough](examples/output/slide-walkthrough.pdf), and a [printable bilingual reference](examples/output/exam-reference.pdf). They explain why averaging local means can be wrong. All example material is original, and the [builder is included](examples/build_demo.py).
+The demo uses three real slides (original pages 11-13) from Katrina LaCurts' MIT OpenCourseWare 6.033, Spring 2018, Lecture 14: RAID 1, RAID 4 and RAID 5. It includes the [source excerpt](examples/input/demo-slides.pdf), a three-page [Chinese walkthrough](examples/output/slide-walkthrough.pdf), and a three-page [printable bilingual reference](examples/output/exam-reference.pdf). Preview images show page 2 (RAID 4). These are independently written educational adaptations of a selected passage, not a full-lecture guide or official answers. See the [official resource](https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/resources/mit6_033s18lec14/) and [reproduction instructions](examples/README.md).
 
 ## Validate
 
@@ -69,4 +69,4 @@ GitHub Actions runs package and test checks on Python 3.11 and 3.13. This is an 
 
 ## License
 
-This project is [MIT licensed](LICENSE). Copyright and license notices for third-party materials are documented in [license notes](references/sources.md).
+Skill and build code are [MIT licensed](LICENSE). The real lecture excerpt, demo teaching content, derived PDFs and their previews are [CC BY-NC-SA 4.0](licenses/MIT-OCW-demo-LICENSE.md). Other copyright and license notices are documented in [license notes](references/sources.md).

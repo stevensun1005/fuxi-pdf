@@ -24,7 +24,7 @@ def check(root=ROOT):
             if '://' in target or target.startswith('#'):
                 continue
             assert (path.parent / target.split('#')[0]).exists(), f'{path}: missing {target}'
-    for name in ['LICENSE', 'licenses/NovaForge-LICENSE.txt', 'licenses/summarize-slides-LICENSE.txt']:
+    for name in ['LICENSE', 'licenses/NovaForge-LICENSE.txt', 'licenses/summarize-slides-LICENSE.txt', 'licenses/MIT-OCW-demo-LICENSE.md']:
         assert (root / name).is_file(), name
     print('PASS: skill metadata, local links and attribution files')
 

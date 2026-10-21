@@ -2,7 +2,8 @@
 
 <p align="center">
   <a href="https://github.com/stevensun1005/fuxi-pdf/actions/workflows/validate.yml"><img src="https://github.com/stevensun1005/fuxi-pdf/actions/workflows/validate.yml/badge.svg" alt="Validate skill"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-26705d" alt="MIT"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/code-MIT-26705d" alt="Code: MIT"></a>
+  <a href="licenses/MIT-OCW-demo-LICENSE.md"><img src="https://img.shields.io/badge/demo-CC_BY--NC--SA_4.0-26705d" alt="Demo: CC BY-NC-SA 4.0"></a>
   <img src="https://img.shields.io/badge/languages-中文%20%2B%20English-26705d" alt="中文与英文">
 </p>
 
@@ -24,14 +25,14 @@ Cheatsheet 不默认等于一页。考试规定两页，就按两页设计；允
 
 ## 看一眼成品
 
-以下演示使用**原创的两张数学幻灯片**，解释“为什么不能直接平均局部平均值”。图片来自实际生成的 PDF，构建脚本随仓库提供。
+以下演示使用 **MIT OpenCourseWare 6.033（Spring 2018，Katrina LaCurts）第 14 讲的真实课件第 11–13 页**，依次解释 RAID 1、RAID 4 与 RAID 5。两册各 3 页；下图预览第 2 页的 RAID 4。选页保留完整原图，讲解由本项目编写，属于节选演示，不代表整讲覆盖或官方答案。
 
 | 逐页中文精讲 | 可打印考场重点册 |
 | --- | --- |
 | ![逐页精讲实际预览](docs/assets/walkthrough.png) | ![考场重点册实际预览](docs/assets/exam-reference.png) |
 | [打开学习册 PDF](examples/output/slide-walkthrough.pdf) | [打开考场册 PDF](examples/output/exam-reference.pdf) |
 
-[原始演示课件](examples/input/demo-slides.pdf) · [演示说明与复现](examples/README.md)
+[真实课件节选](examples/input/demo-slides.pdf) · [官方课件来源](https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/resources/mit6_033s18lec14/) · [演示说明与复现](examples/README.md)
 
 ## 安装
 
@@ -123,4 +124,4 @@ GitHub Actions 在 Python 3.11、3.13 上执行元数据、链接、覆盖脚本
 
 ## 许可
 
-本项目采用 [MIT License](LICENSE)。第三方素材的版权与许可声明见 [许可说明](references/sources.md)。
+技能与构建代码采用 [MIT License](LICENSE)。真实课件节选、演示讲解与其 PDF/预览采用 [CC BY-NC-SA 4.0](licenses/MIT-OCW-demo-LICENSE.md)。其他素材声明见 [许可说明](references/sources.md)。

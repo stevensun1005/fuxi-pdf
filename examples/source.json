@@ -1,0 +1,18 @@
+{
+  "source_id": "MIT6.033-L14-excerpt",
+  "title": "Fault Tolerance: Reliability via Replication",
+  "course": "6.033 Computer System Engineering",
+  "term": "Spring 2018",
+  "author": "Katrina LaCurts",
+  "institution": "Massachusetts Institute of Technology",
+  "resource_url": "https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/resources/mit6_033s18lec14/",
+  "pdf_url": "https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/8eb16d3628bbd77ee7e8471b9871ec09_MIT6_033S18lec14.pdf",
+  "license": "CC BY-NC-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "terms_url": "https://ocw.mit.edu/pages/privacy-and-terms-of-use/",
+  "retrieved": "2026-10-21",
+  "upstream_page_count": 15,
+  "upstream_sha256": "4f66a2623ddf91e55f6e11307b8df67cc2c88f4d20c0e4338ab24ba7f01b04ce",
+  "selected_pages": [11, 12, 13],
+  "changes": "Selected three complete pages without redrawing or cropping; added separate Chinese teaching and bilingual exam-reference adaptations. This is an excerpt, not the complete lecture. No endorsement is implied."
+}

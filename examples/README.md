@@ -1,14 +1,18 @@
-# 原创演示 / Original demonstration
+# 真实公开课件演示 / Real lecture demonstration
 
-用两张原创幻灯片解释“为什么不能平均局部平均值”，展示同源资料的两种成品。
+来源：**Katrina LaCurts，MIT OpenCourseWare，6.033 Computer System Engineering，Spring 2018，Lecture 14: Fault Tolerance: Reliability via Replication**。
+
+本演示选取原课件 **第 11-13 页**，分别讲 RAID 1、RAID 4 与 RAID 5。选页构成一个连贯的小节；不声称覆盖整份 15 页课件。出处、选页范围和下载文件 SHA-256 见 [source.json](source.json)；中文与英文讲解源稿见 [demo-content.json](demo-content.json)。
 
 | 文件 | 内容与纸张 |
 | --- | --- |
-| [demo-slides.pdf](input/demo-slides.pdf) | 2 张原创宽屏课件 |
-| [slide-walkthrough.pdf](output/slide-walkthrough.pdf) | 2 页竖版 A4：每页上方原课件，下方中文精讲 |
-| [exam-reference.pdf](output/exam-reference.pdf) | 1 页 Letter：中文解释、反例、英文核心表述及两道短答 |
+| [demo-slides.pdf](input/demo-slides.pdf) | 3 张完整原页，保留原图、署名和原页码 |
+| [slide-walkthrough.pdf](output/slide-walkthrough.pdf) | 3 页竖版 A4：原课件在上，中文精讲在下，带逐页书签 |
+| [exam-reference.pdf](output/exam-reference.pdf) | 3 页 Letter：中文机制与例子，英文核心表述及每页两道短答；末页有比较表 |
 
-素材与答案是演示，不是真题。例子独立核算：[2,4] 和 [12] 的局部均值为 3 和 12，直接平均得到 7.5；全局平均为 18/3=6。保存 `(sum,count)` 后再合并与除法可以保留权重。
+原课件来自 [官方资源页](https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/resources/mit6_033s18lec14/)。演示讲解、补充例子和英文短答由本项目编写，不是官方答案或真题。预览使用成品第 2 页（RAID 4）。
+
+RAID 4 的自编 XOR 例子独立核算：`10 XOR 11 = 01`；丢失第二块后，`10 XOR 01 = 11`。三种方案的 N 均指原始数据需要的等容量盘数，C 为单盘容量；RAID 1 用 2N 块盘，RAID 4/5 用 N+1 块盘，三者可用容量约为 N×C。
 
 ## 复现
 
@@ -18,6 +22,24 @@
 python examples/build_demo.py --font /path/to/chinese-truetype-font.ttf
 ```
 
-Windows 安装了 Microsoft YaHei 时也可直接运行 `python examples/build_demo.py`。字体需为 ReportLab 支持的 TrueType `.ttf` 或 `.ttc`；字体不随仓库提供。构建器只生成这些固定演示，不负责读取任意课程自动总结。
+脚本默认使用仓库中的真实课件节选，重建两册、README 预览与覆盖台账，不访问网络。Windows 安装 Microsoft YaHei 时可省略 `--font`。字体需为 ReportLab 支持的 TrueType `.ttf` 或 `.ttc`，不随仓库提供。
 
-脚本同时生成 README 中的 PNG 预览以及 `coverage.csv`。用 `python scripts/validate_coverage.py examples/coverage.csv --inventory examples/inventory.json` 检查两张输入页均有对应。
+如需从官方 PDF 重新提取三张原页，下载 [完整课件](https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/8eb16d3628bbd77ee7e8471b9871ec09_MIT6_033S18lec14.pdf)，再指定：
+
+```sh
+python examples/build_demo.py --source-pdf /path/to/MIT6_033S18lec14.pdf --font /path/to/chinese-truetype-font.ttf
+```
+
+构建器先核对源文件哈希，防止版本变化后静默选错页。它是固定演示构建器，不负责自动总结任意课程。
+
+```sh
+python scripts/validate_coverage.py examples/coverage.csv --inventory examples/inventory.json
+```
+
+台账的 `page_or_slide` 为节选内的第 1-3 页；`citation` 与 `notes` 明确映射到原课件第 11-13 页。该验证只证明三页节选有去向，不证明整讲覆盖。
+
+## 许可
+
+真实课件节选、演示讲解、派生 PDF 和其 PNG 预览采用 [CC BY-NC-SA 4.0](../licenses/MIT-OCW-demo-LICENSE.md)。技能与构建代码仍采用根目录 MIT 许可。
+
+打印考场册：Letter，100% 实际大小，每面一页；单面 3 张，双面 2 张、沿长边翻转。这只是演示设置，是否允许携带及页数限制以实际考试规定为准。

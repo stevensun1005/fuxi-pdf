@@ -1,0 +1,4 @@
+PyYAML>=6.0
+pypdf>=5.0
+reportlab>=4.0
+pypdfium2>=4.30

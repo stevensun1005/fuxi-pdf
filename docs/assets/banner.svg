@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360" role="img" aria-labelledby="title desc">
+  <title id="title">复习pdf · fuxi-pdf</title>
+  <desc id="desc">从逐页中文精讲到中文理解、英文作答的可打印考场资料。</desc>
+  <rect width="1280" height="360" rx="20" fill="#f6f5f0"/>
+  <circle cx="1200" cy="-80" r="300" fill="#dfece5"/>
+  <rect x="48" y="45" width="76" height="6" rx="3" fill="#26705d"/>
+  <g font-family="Arial,Microsoft YaHei,Noto Sans CJK SC,sans-serif">
+    <text x="48" y="126" font-size="62" font-weight="700" fill="#173e36">复习pdf</text>
+    <text x="296" y="124" font-size="30" fill="#26705d">fuxi-pdf</text>
+    <text x="48" y="185" font-size="29" fill="#203e35">把课件讲明白，把答案写清楚。</text>
+    <text x="48" y="222" font-size="20" fill="#52665f">Understand in Chinese. Answer in English.</text>
+    <g fill="#fff" stroke="#c9d9d0"><rect x="48" y="262" width="132" height="38" rx="19"/><rect x="194" y="262" width="152" height="38" rx="19"/><rect x="360" y="262" width="152" height="38" rx="19"/></g>
+    <g font-size="15" fill="#26705d"><text x="72" y="287">逐页精讲</text><text x="213" y="287">SOURCE-CITED</text><text x="390" y="287">PRINT-READY</text></g>
+    <rect x="736" y="46" width="466" height="124" rx="14" fill="#fff" stroke="#ccdcd3"/>
+    <rect x="736" y="190" width="466" height="124" rx="14" fill="#fff" stroke="#ccdcd3"/>
+    <text x="762" y="85" font-size="17" font-weight="700" fill="#26705d">01 / 学习册</text>
+    <text x="762" y="121" font-size="24" fill="#173e36">原课件在上，中文精讲在下</text>
+    <text x="762" y="148" font-size="15" fill="#63756e">Every slide. Explained step by step.</text>
+    <text x="762" y="229" font-size="17" font-weight="700" fill="#26705d">02 / 考场册</text>
+    <text x="762" y="265" font-size="24" fill="#173e36">中文理解 → English answers</text>
+    <text x="762" y="292" font-size="15" fill="#63756e">Mechanisms, examples, conditions and short answers.</text>
+  </g>
+</svg>

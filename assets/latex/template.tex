@@ -1,0 +1,344 @@
+% !TEX program = xelatex
+%% ══════════════════════════════════════════════════════════════════
+%%  NovaForge — 通用知识笔记 LaTeX 模板
+%%  适用于：考研/考公/专业课/科研/项目/竞赛
+%%  编译方式：xelatex × 2 遍后清理 .aux/.log/.out/.toc 等辅助文件
+%%  使用 scripts/compile.sh（macOS/Linux）或 scripts/compile.bat（Windows）一键完成
+%% ══════════════════════════════════════════════════════════════════
+\documentclass[10pt,a4paper]{article}
+
+%% ── 中文 ──
+\usepackage{xeCJK}
+\setCJKmainfont{SimSun}
+\usepackage{indentfirst}
+
+%% ── 中文引号（重要） ──
+%% 必须使用 Unicode 弯引号：“”(U+201C/U+201D)，不可使用 ASCII 直引号 " (U+0022)
+%% 直引号在 xelatex 中渲染方向错误，编辑器中请设置自动替换直引号为弯引号
+
+%% ── 数学/公式（非理工科可移除） ──
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{cancel}       % \cancel{} 划掉项
+\usepackage{physics}      % 向量/微分/括号简写
+\usepackage{mathrsfs}     % \mathscr 花体
+\usepackage{bm}           % \bm{} 粗体符号
+
+%% ── 页面 ──
+\usepackage[top=1.4cm,bottom=1.2cm,left=1.0cm,right=1.0cm,includehead]{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{array,booktabs,multirow}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{environ}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing,patterns,arrows.meta}
+
+\hypersetup{hidelinks}
+
+%% ── 颜色系统（可按学科自定义） ──
+%%  理科风（深蓝） | 文科风（暗红） | 清新风（墨绿）
+\definecolor{titlecolor}{HTML}{1a237e}    % 主标题 ← 从这里换色
+\definecolor{seccolor}{HTML}{004d40}      % 节标题
+\definecolor{subseccolor}{HTML}{b71c1c}   % 小节标题
+\definecolor{emphcolor}{HTML}{bf360c}     % 强调
+\definecolor{infocolor}{HTML}{1565c0}     % 提示框
+\definecolor{warncolor}{HTML}{e65100}     % 警告
+\definecolor{supercolor}{HTML}{880e4f}    % 超纲/拓展
+\definecolor{examplecolor}{HTML}{1b5e20}  % 示例
+\definecolor{sectionbg}{HTML}{e8eaf6}     % 标题背景
+\definecolor{lightgray}{HTML}{f5f5f5}
+\definecolor{hwcolor}{HTML}{795548}       % 习题
+\definecolor{learncolor}{HTML}{2e7d32}    % 练习
+
+%% ── 标题格式 ──
+\titleformat{\section}{\LARGE\bfseries\color{titlecolor}}{}{0em}{}[\vspace{-0.2em}\rule{\textwidth}{0.8pt}]
+\titleformat{\subsection}{\large\bfseries\color{seccolor}}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{subseccolor}}{}{0em}{}
+\titlespacing*{\section}{0pt}{1em}{0.5em}
+\titlespacing*{\subsection}{0pt}{0.6em}{0.2em}
+\titlespacing*{\subsubsection}{0pt}{0.4em}{0.1em}
+
+%% ── 页眉 ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{gray}<项目/考试说明>}
+\fancyhead[R]{\small\color{gray}<模块名> · <作者>}
+\fancyfoot[C]{\small\color{gray}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\setlength{\headheight}{14pt}
+
+%% ── 自定义命令 ──
+\newcommand{\key}[1]{\textcolor{emphcolor}{\textbf{#1}}}       % 强调
+\newcommand{\super}[1]{\textcolor{supercolor}{\textbf{#1}}}    % 拓展
+\newcommand{\source}[1]{\textcolor{purple!60!black}{\small [#1]}} % 标注来源
+\newcommand{\formula}[1]{\vspace{0.3em}\begin{center}
+  \fcolorbox{titlecolor}{white}{\parbox{0.92\textwidth}
+  {\centering\color{titlecolor}\small #1}}\end{center}\vspace{0.2em}} % 原理/公式框
+\newcommand{\infobox}[1]{\vspace{0.3em}{\small\color{infocolor}
+  \noindent$\blacktriangleright$ #1}\vspace{0.2em}}            % 提示
+\newcommand{\warning}[1]{\vspace{0.3em}{\small\color{warncolor}
+  \noindent\textbf{!} #1}\vspace{0.2em}}                       % 注意
+\newcommand{\sep}{\vspace{0.5em}\hrule\vspace{0.5em}}          % 分隔
+
+%% ── 知识标题栏 ──
+\newcommand{\knowtitle}[1]{%
+  \vspace{0.4em}%
+  \noindent\colorbox{sectionbg}{\parbox{\dimexpr\textwidth-2\fboxsep\relax}
+  {\small\bfseries\color{titlecolor}#1}}%
+  \vspace{0.2em}%
+}
+
+%% ── 例题/案例环境（紫色标签，自动带"解/"分析"） ──
+\newenvironment{exampenv}[1]{%
+  \vspace{0.5em}%
+  \noindent{\color{supercolor!15}\rule{0.4em}{0pt}}\hspace{-0.4em}%
+  \textcolor{supercolor}{\rule{0.4em}{0.9em}}\hspace{0.3em}%
+  \textcolor{supercolor}{\textbf{【案例/例题】#1}}\par
+  \noindent\hspace{0.7em}{\small\color{infocolor}分析：}\normalsize
+}{%
+  \par\vspace{0.3em}%
+}
+
+%% ── 练习/复盘环境（绿色标签，带解答） ──
+\newenvironment{pracenv}[1]{%
+  \vspace{0.5em}%
+  \noindent{\color{learncolor!15}\rule{0.4em}{0pt}}\hspace{-0.4em}%
+  \textcolor{learncolor}{\rule{0.4em}{0.9em}}\hspace{0.3em}%
+  \textcolor{learncolor}{\textbf{【练习/复盘】#1}}\par
+  \noindent\hspace{0.7em}{\small\color{gray}解答：}\normalsize
+}{%
+  \par\vspace{0.3em}%
+}
+
+%% ── 课后作业环境（棕色标签，解答见附录） ──
+\newenvironment{hwenv}[2]{%
+  \vspace{0.5em}%
+  \noindent{\color{hwcolor!15}\rule{0.4em}{0pt}}\hspace{-0.4em}%
+  \textcolor{hwcolor}{\rule{0.4em}{0.9em}}\hspace{0.3em}%
+  \textcolor{hwcolor}{\textbf{【作业】#1}}\par
+  \noindent\hspace{0.7em}{\small\color{gray}（解答$\to$ \hyperref[#2]{附录\ref*{#2}}）}\normalsize
+}{%
+  \par\vspace{0.3em}%
+}
+
+%% ════════════════════════════════════════════
+\begin{document}
+
+%% ── 封面 ──
+\begin{center}
+  \vspace{2em}
+  {\Huge\bfseries\color{titlecolor} <科目/项目名称>} \\[0.3em]
+  {\LARGE\bfseries\color{titlecolor} <副标题/考试全称>} \\[0.3em]
+  {\large\color{gray!70!black} <一句话定位>} \\[0.3em]
+  \vspace{0.3em}
+  {\small\color{gray} 参考：<教材/资料1> \;$\vert$\; <教材/资料2>} \\[0.3em]
+  {\small\color{gray} <作者> \quad <机构/方向> \;$\vert$\; <模块名>} \\[0.6em]
+  {\normalsize\color{titlecolor!80!black}\textbf{版本：<版本号/年份>}} \\[0.1em]
+  {\footnotesize\color{gray} 最后修订：<日期>}
+  \vspace{1em}
+\end{center}
+
+%% ── 范围说明（如有多个方向/模块） ──
+\section*{范围说明}
+\noindent <说明>
+
+\begin{center}
+{\footnotesize
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{模块} & \textbf{覆盖内容} \\
+\midrule
+<模块A> & <内容> \\
+\textbf{<模块B>} & \textbf{<内容> $\leftarrow$ 本资料对应} \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
+%% ── 使用说明 ──
+\section*{如何使用这份笔记}
+\noindent 这份笔记的目标是\textbf{帮你建立系统的知识体系}：
+\begin{itemize}
+  \item \textbf{搭配学习}：配合教材/课程使用，先理解再巩固
+  \item \textbf{独立使用}：完整覆盖核心知识点，独立查阅
+  \item \textbf{复习冲刺}：方法总结 + 典型例题 + 速查表，快速回顾
+\end{itemize}
+
+\noindent\textcolor{emphcolor}{\textbf{每节结构：}}
+\begin{itemize}[leftmargin=2em]
+  \item[\textbf{1}] \textbf{概念引入} — 先建立直觉
+  \item[\textbf{2}] \textbf{核心原理} — 公式/原理框突出
+  \item[\textbf{3}] \textbf{方法技巧} — 实操技巧浓缩
+  \item[\textbf{4}] \textbf{典型示例} — 经典案例搭桥
+  \item[\textbf{5}] \textbf{真题/实战} — 真实题目/项目
+  \item[\textbf{6}] \textbf{巩固练习} — 复盘训练
+  \item[\textbf{7}] \textbf{专题总结} — 末章归纳核心题型/模式
+\end{itemize}
+\vspace{1em}
+
+%% ── 目录 ──
+\small
+\tableofcontents
+\normalsize
+\vspace{1em}
+
+%% ══════════════════════════════════════════════════════════════════
+%%  第一模块
+%% ══════════════════════════════════════════════════════════════════
+\section{第一模块 \quad <模块名>}
+
+\subsection{第1章 \quad <章名>}
+
+\knowtitle{1.1 概念引入}
+
+\noindent <本节要解决什么问题？为什么重要？>
+
+\knowtitle{1.2 核心原理/公式}
+
+\formula{$\displaystyle <核心内容>$}
+
+\noindent\infobox{<提示>}
+
+\warning{<常见误区>}
+
+\knowtitle{1.3 方法技巧}
+
+\noindent\textcolor{emphcolor}{\textbf{要点：}}
+\begin{itemize}
+  \item <技巧1>
+  \item <技巧2>
+\end{itemize}
+
+\knowtitle{1.4 典型示例}
+
+\begin{exampenv}{<标题>}
+<示例展示>
+\end{exampenv}
+
+%% ── 流程图/状态图示例（箭头标签防重叠） ──
+%% 使用 alabel 样式避免标签与目标重叠：
+%%
+%%   \begin{center}
+%%   \begin{tikzpicture}[node distance=2.5cm]
+%%     \node (A) {起点};
+%%     \node (B) [right of=A] {终点};
+%%     \draw[->] (A) -- node[alabel] {条件} (B);
+%%   \end{tikzpicture}
+%%   \end{center}
+%%
+%% 更多样式：alabel above（箭头上方偏左）、alabel below（箭头下方偏左）
+%% \draw[->] (A) -- node[alabel above] {条件} (B);
+%% \draw[->] (A) -- node[alabel below] {条件} (B);
+
+\knowtitle{1.5 真题/实战}
+
+\begin{exampenv}{<来源+年份+描述>}
+<题目和解答>
+\end{exampenv}
+
+\knowtitle{1.6 巩固练习}
+
+\begin{pracenv}{<标题>}
+<练习>
+\end{pracenv}
+
+\knowtitle{1.7 课后作业}
+
+\begin{hwenv}{<标题>}{ans:ch1}
+<题目>
+\end{hwenv}
+
+\sep
+
+%% ══════════════════════════════════════════════════════════════════
+%%  更多章节...（复制上面的结构，注意 ans:chX 标签递推）
+%% ══════════════════════════════════════════════════════════════════
+
+%% ══════════════════════════════════════════════════════════════════
+%%  专题/题型专项总结
+%% ══════════════════════════════════════════════════════════════════
+\section{专题/题型专项总结}
+
+\textcolor{gray}{\small [版本 <版本号> · 最后修订 <日期>]}
+
+~\\[0.3em]
+
+\knowtitle{专题一：<名称>}
+
+\noindent\textbf{方法总结}：<说明>
+
+\formula{<核心公式/原理>}
+
+\textcolor{supercolor}{\small \textbf{关联：}} \textcolor{supercolor}{\small <来源>}
+
+\noindent\textbf{典型示例}：
+
+\begin{exampenv}{<标题>}
+<展示>
+\end{exampenv}
+
+\noindent\textbf{配套练习}：
+
+\begin{pracenv}{<标题>}
+<练习>
+\end{pracenv}
+
+\vspace{0.5em}
+
+%% ── 更多专题... ──
+
+\sep
+
+%% ── 速查表 ──
+\subsection{核心速查表}
+
+% 按模块分子节
+\subsubsection*{模块一：<名称>}
+
+\begin{center}
+{\footnotesize
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{条目} & \textbf{内容} \\
+\midrule
+<条目A> & $\displaystyle <内容>$ \\
+<条目B> & $\displaystyle <内容>$ \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
+\vspace{0.5em}
+
+%% ── 作业答案 ──
+\subsection{作业答案与提示}
+
+\subsubsection*{第1章 <章名>} \label{ans:ch1}
+\begin{enumerate}[label=\textbf{1.\arabic*}]
+  \item <答案> \quad$\Big($说明\Big)$
+\end{enumerate}
+
+%% ── 拓展阅读/参考文献 ──
+\subsection*{拓展阅读与参考文献}
+
+\vspace{0.2em}
+\noindent
+\hangindent=1.5em
+\hangafter=1
+\textbf{[1]} <作者>.<标题>. <出版社>，<年份>. \\
+\hspace*{1.5em}\textcolor{gray}{\small <备注>}
+
+\vspace{0.5em}
+\noindent\textcolor{gray}{\small <致谢> \quad <作者> \quad 最后修订 <日期>}
+
+%% ════════════════════════════════════════════
+%%  结尾
+%% ════════════════════════════════════════════
+\vspace{1em}
+\begin{center}
+  {\Huge\bfseries\color{titlecolor} \textemdash\textemdash 保持学习！\textemdash\textemdash}
+\end{center}
+
+\end{document}

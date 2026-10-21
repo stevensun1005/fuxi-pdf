@@ -1,0 +1,3 @@
+﻿source_id,lecture_id,page_or_slide,topic,concept_id,importance,disposition,summary_location,explanation_depth,visual_check,citation,notes
+DEMO,demo,1,Mean aggregation,mean-of-means,Inferred: demonstration focus,covered,slide-walkthrough.pdf p.1; exam-reference.pdf p.1,"Mechanism, example and caveat",manual inspection required after rebuilding,DEMO p.1,Original demonstration material
+DEMO,demo,2,Mean aggregation,sum-count-state,Inferred: demonstration focus,covered,slide-walkthrough.pdf p.2; exam-reference.pdf p.1,"Mechanism, example and caveat",manual inspection required after rebuilding,DEMO p.2,Original demonstration material

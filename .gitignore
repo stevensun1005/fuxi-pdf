@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+.DS_Store
+Thumbs.db
+build/
+work/
+outputs/
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz

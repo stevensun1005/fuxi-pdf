@@ -1,0 +1,25 @@
+% Original fuxi-pdf starter. Compile twice with XeLaTeX.
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=18mm]{geometry}
+\usepackage{fontspec,xeCJK,amsmath,booktabs,tabularx,hyperref}
+\IfFontExistsTF{TeX Gyre Termes}{\setmainfont{TeX Gyre Termes}}{
+  \IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{
+    \setmainfont{Latin Modern Roman}}}
+\IfFontExistsTF{Noto Serif CJK SC}{\setCJKmainfont{Noto Serif CJK SC}}{
+  \IfFontExistsTF{Microsoft YaHei}{\setCJKmainfont{Microsoft YaHei}}{
+    \setCJKmainfont{FandolSong-Regular}}}
+\hypersetup{hidelinks}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\begin{document}
+\section*{复习资料 / Study reference}
+\textbf{中文理解：}局部平均值不能直接平均，除非组大小相同或正确加权。
+保留总和与数量，合并后最后除一次。
+\[
+(s_1,c_1)\oplus(s_2,c_2)=(s_1+s_2,c_1+c_2),\qquad \bar{x}=s/c\ (c>0).
+\]
+\textbf{English answer:} Preserve the sum and count for each group. Merge both
+components and divide only after aggregation, so that observation weights are retained.
+
+\small 来源：原创演示。实际使用时填写已核对的讲次与源页码。
+\end{document}

@@ -1,0 +1,123 @@
+%% ══════════════════════════════════════════════════════════════════
+%%  NovaForge Preamble — 可独立引用的导言区
+%%  用法：\input{preamble.tex}
+%% ══════════════════════════════════════════════════════════════════
+
+%% ── 中文 ──
+\usepackage{xeCJK}
+\setCJKmainfont{SimSun}
+\usepackage{indentfirst}
+
+%% ── 中文引号（重要） ──
+%% 必须使用 Unicode 弯引号：“”(U+201C/U+201D)，不可使用 ASCII 直引号 " (U+0022)
+%% 直引号在 xelatex 中渲染方向错误，编辑器中请设置自动替换直引号为弯引号
+
+%% ── 数学/公式（非理工科可移除） ──
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{cancel}
+\usepackage{physics}
+\usepackage{mathrsfs}
+\usepackage{bm}
+
+%% ── 页面 ──
+\usepackage[top=1.4cm,bottom=1.2cm,left=1.0cm,right=1.0cm,includehead]{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{array,booktabs,multirow}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{environ}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing,patterns,arrows.meta}
+%% 箭头图标签防重叠样式
+%% 用法：draw[->] (A) -- (B) node[alabel] {条件};
+%%       draw[->] (A) -- (B) node[alabel above] {条件};
+%%       draw[->] (A) -- (B) node[alabel below] {条件};
+\tikzset{
+  alabel/.style={auto, inner sep=2pt, font=\small},
+  alabel above/.style={above, pos=0.4, inner sep=2pt, font=\small},
+  alabel below/.style={below, pos=0.4, inner sep=2pt, font=\small},
+}
+\hypersetup{hidelinks}
+
+%% ── 颜色系统 ──
+\definecolor{titlecolor}{HTML}{1a237e}
+\definecolor{seccolor}{HTML}{004d40}
+\definecolor{subseccolor}{HTML}{b71c1c}
+\definecolor{emphcolor}{HTML}{bf360c}
+\definecolor{infocolor}{HTML}{1565c0}
+\definecolor{warncolor}{HTML}{e65100}
+\definecolor{supercolor}{HTML}{880e4f}
+\definecolor{examplecolor}{HTML}{1b5e20}
+\definecolor{sectionbg}{HTML}{e8eaf6}
+\definecolor{lightgray}{HTML}{f5f5f5}
+\definecolor{hwcolor}{HTML}{795548}
+\definecolor{learncolor}{HTML}{2e7d32}
+
+%% ── 标题格式 ──
+\titleformat{\section}{\LARGE\bfseries\color{titlecolor}}{}{0em}{}[\vspace{-0.2em}\rule{\textwidth}{0.8pt}]
+\titleformat{\subsection}{\large\bfseries\color{seccolor}}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{subseccolor}}{}{0em}{}
+\titlespacing*{\section}{0pt}{1em}{0.5em}
+\titlespacing*{\subsection}{0pt}{0.6em}{0.2em}
+\titlespacing*{\subsubsection}{0pt}{0.4em}{0.1em}
+
+%% ── 页眉 ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{gray}<左页眉>}
+\fancyhead[R]{\small\color{gray}<右页眉>}
+\fancyfoot[C]{\small\color{gray}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\setlength{\headheight}{14pt}
+
+%% ── 自定义命令 ──
+\newcommand{\key}[1]{\textcolor{emphcolor}{\textbf{#1}}}
+\newcommand{\super}[1]{\textcolor{supercolor}{\textbf{#1}}}
+\newcommand{\source}[1]{\textcolor{purple!60!black}{\small [#1]}}
+\newcommand{\formula}[1]{\vspace{0.3em}\begin{center}\fcolorbox{titlecolor}{white}{\parbox{0.92\textwidth}{\centering\color{titlecolor}\small #1}}\end{center}\vspace{0.2em}}
+\newcommand{\infobox}[1]{\vspace{0.3em}{\small\color{infocolor}\noindent$\blacktriangleright$ #1}\vspace{0.2em}}
+\newcommand{\warning}[1]{\vspace{0.3em}{\small\color{warncolor}\noindent\textbf{!} #1}\vspace{0.2em}}
+\newcommand{\sep}{\vspace{0.5em}\hrule\vspace{0.5em}}
+
+\newcommand{\knowtitle}[1]{%
+  \vspace{0.4em}%
+  \noindent\colorbox{sectionbg}{\parbox{\dimexpr\textwidth-2\fboxsep\relax}{\small\bfseries\color{titlecolor}#1}}%
+  \vspace{0.2em}%
+}
+
+\newenvironment{exampenv}[1]{%
+  \vspace{0.5em}%
+  \noindent{\color{supercolor!15}\rule{0.4em}{0pt}}\hspace{-0.4em}%
+  \textcolor{supercolor}{\rule{0.4em}{0.9em}}\hspace{0.3em}%
+  \textcolor{supercolor}{\textbf{【案例/例题】#1}}\par
+  \noindent\hspace{0.7em}{\small\color{infocolor}分析：}\normalsize
+}{%
+  \par\vspace{0.3em}%
+}
+
+\newenvironment{pracenv}[1]{%
+  \vspace{0.5em}%
+  \noindent{\color{learncolor!15}\rule{0.4em}{0pt}}\hspace{-0.4em}%
+  \textcolor{learncolor}{\rule{0.4em}{0.9em}}\hspace{0.3em}%
+  \textcolor{learncolor}{\textbf{【练习/复盘】#1}}\par
+  \noindent\hspace{0.7em}{\small\color{gray}解答：}\normalsize
+}{%
+  \par\vspace{0.3em}%
+}
+
+\newenvironment{hwenv}[2]{%
+  \vspace{0.5em}%
+  \noindent{\color{hwcolor!15}\rule{0.4em}{0pt}}\hspace{-0.4em}%
+  \textcolor{hwcolor}{\rule{0.4em}{0.9em}}\hspace{0.3em}%
+  \textcolor{hwcolor}{\textbf{【作业】#1}}\par
+  \noindent\hspace{0.7em}{\small\color{gray}（解答$\to$ \hyperref[#2]{附录\ref*{#2}}）}\normalsize
+}{%
+  \par\vspace{0.3em}%
+}
+
+%% -- exam review mode commands --
+\newcommand{\yearlabel}[2][]{\textcolor{supercolor}{\small [#2年#1]}}
+\newcommand{\seeans}[1]{\textcolor{gray}{\small（答案见末节）}}
+\newcommand{\answer}[1]{\vspace{0.5em}\noindent\textcolor{examplecolor}{\textbf{答案 #1：}}\normalsize}

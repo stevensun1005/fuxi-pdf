@@ -1,0 +1,6 @@
+interface:
+  display_name: "复习pdf"
+  short_description: "逐页中文精讲与可打印考场重点册，先中文理解再用英文作答，附来源与核验"
+  default_prompt: "使用 $fuxi-pdf 按需求准备复习 PDF 或 cheatsheet：逐页精讲用中文，考场册先中文解释再给英文短答，并核验来源覆盖和排版。"
+policy:
+  allow_implicit_invocation: true

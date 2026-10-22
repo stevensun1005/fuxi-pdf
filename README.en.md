@@ -54,7 +54,7 @@ This approximates a half-semester **topic selection**, not an official midterm s
 
 A separate example uses **MIT OCW 6.033 Computer System Engineering (Spring 2018, Katrina LaCurts), Lecture 14**. Its 15 source pages become a **15-page Chinese walkthrough** and a **10-page Chinese–English reference booklet**.
 
-<details>
+<details open>
 <summary><strong>Expand previews: original slide above explanation, plus a detailed bilingual reference</strong></summary>
 
 | Walkthrough · source page 12: RAID 4 | Unlimited-budget bilingual booklet · page 3: availability |

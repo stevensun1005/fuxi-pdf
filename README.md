@@ -54,7 +54,7 @@
 
 下面是另一份示例：**MIT OCW 6.033 Computer System Engineering（Spring 2018，Katrina LaCurts）第 14 讲**。全讲 15 页，生成 **15 页中文逐页精讲**和 **10 页中英双语详细考场册**。
 
-<details>
+<details open>
 <summary><strong>展开预览：原页在上、讲解在下，以及详细双语参考册</strong></summary>
 
 | 逐页精讲 · 原页 12：RAID 4 | 不限页双语详细册 · 第 3 页：可用性 |
